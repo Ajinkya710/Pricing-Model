@@ -17,41 +17,49 @@ const menu = [
     name: "Dashboard",
     url: "/dashboard",
     logo: <DashboardLogo />,
+    isNew: false,
   },
   {
     name: "Orders",
     url: "/orders",
     logo: <OrdersLogo />,
+    isNew: false,
   },
   {
     name: "Customers",
     url: "/customers",
     logo: <CustomersLogo />,
+    isNew: false,
   },
   {
     name: "Products",
     url: "/products",
     logo: <ProductsLogo />,
+    isNew: false,
   },
   {
     name: "Pricing",
     url: "/pricing",
     logo: <PricingLogo />,
+    isNew: false,
   },
   {
     name: "Freight",
     url: "/freight",
     logo: <FreightLogo />,
+    isNew: true,
   },
   {
     name: "Integrations",
     url: "/integrations",
     logo: <IntegrationsLogo />,
+    isNew: false,
   },
   {
     name: "Settings",
     url: "/settings",
     logo: <SettingsLogo />,
+    isNew: false,
   },
 ];
 
@@ -70,6 +78,7 @@ const Sidebar: React.FC = () => {
             <MenuItem key={index} to={item.url} isActive={isActive}>
               <StyledLogo isActive={isActive}>{item.logo}</StyledLogo>
               <span>{item.name}</span>
+              {item.isNew && <span>NEW</span>}
             </MenuItem>
           );
         })}
@@ -105,17 +114,23 @@ const Menu = styled.div`
 `;
 
 const MenuItem = styled(Link)<{ isActive: boolean }>`
-  padding: 10px 0 10px 32px;
+  padding: 10px 32px;
   display: flex;
-  gap: 10px;
+  gap: 12px;
   text-decoration: none;
   color: #637381;
 
   ${({ isActive }) =>
     isActive &&
     `
+      border-right: 1.5px solid #147D73;
       color: #212b36 !important;
   `}
+
+  span:nth-of-type(2) {
+    color: #dc3545;
+    margin-left: auto;
+  }
 `;
 
 const StyledLogo = styled.div<{ isActive: boolean }>`

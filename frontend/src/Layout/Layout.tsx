@@ -1,4 +1,3 @@
-// src/components/Layout.tsx
 import React from "react";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
@@ -11,14 +10,10 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <LayoutWrapper>
-      {/* Sidebar */}
       <LayoutSidebar>
         <Sidebar />
       </LayoutSidebar>
-
-      {/* Main Content */}
       <LayoutMain>
-        {/* Navbar */}
         <Navbar />
         <LayoutContent>{children}</LayoutContent>
       </LayoutMain>
@@ -35,7 +30,7 @@ const LayoutWrapper = styled.div`
 
 const LayoutSidebar = styled.div`
   width: 260px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   color: #637381;
 `;
 
