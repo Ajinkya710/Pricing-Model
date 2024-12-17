@@ -1,19 +1,23 @@
 import React from "react";
 import Breadcrumbs from "../../Layout/Breadcrumbs";
 import styled from "styled-components";
+import PricingProfile from "./Components/PricingProfile";
 
 const Pricing = () => {
   return (
-    <PricingWrapper>
-      <Breadcrumbs
-        items={["Pricing Profile", "Setup a Profile"]}
-        description="Setup your pricing profile, select products and assign customers"
-      />
-      <Buttons>
-        <CancelButton>Cancel</CancelButton>
-        <SaveButton>Save as Draft</SaveButton>
-      </Buttons>
-    </PricingWrapper>
+    <React.Fragment>
+      <PricingWrapper>
+        <Breadcrumbs
+          items={["Pricing Profile", "Setup a Profile"]}
+          description="Setup your pricing profile, select products and assign customers"
+        />
+        <Buttons>
+          <CancelButton>Cancel</CancelButton>
+          <SaveButton>Save as Draft</SaveButton>
+        </Buttons>
+      </PricingWrapper>
+      <PricingProfile />
+    </React.Fragment>
   );
 };
 
@@ -46,9 +50,9 @@ const SaveButton = styled.button`
   min-width: 120px;
   font-weight: 600;
   font-family: Inter;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 100px;
-  border: 0.25px solid #F0F0F0;
+  border: 0.25px solid #f0f0f0;
   padding: 13px 16px;
   cursor: pointer;
 `;

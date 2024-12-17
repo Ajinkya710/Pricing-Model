@@ -1,11 +1,17 @@
-import React from 'react'
+import React from "react";
+import styled from "styled-components";
 
 const ComingSoon = () => {
   return (
-    <div>
+    <ComingSoonWrapper>
       We are adding new features... stay tuned!
-    </div>
-  )
-}
+    </ComingSoonWrapper>
+  );
+};
 
-export default ComingSoon
+export default ComingSoon;
+
+const ComingSoonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
