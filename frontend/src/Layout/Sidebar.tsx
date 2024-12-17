@@ -75,11 +75,14 @@ const Sidebar: React.FC = () => {
         {menu.map((item, index) => {
           const isActive = location.pathname === item.url;
           return (
-            <MenuItem key={index} to={item.url} isActive={isActive}>
-              <StyledLogo isActive={isActive}>{item.logo}</StyledLogo>
-              <span>{item.name}</span>
-              {item.isNew && <span>NEW</span>}
-            </MenuItem>
+            <>
+              <MenuItem key={index} to={item.url} isActive={isActive}>
+                <StyledLogo isActive={isActive}>{item.logo}</StyledLogo>
+                <span>{item.name}</span>
+                {item.isNew && <span>NEW</span>}
+              </MenuItem>
+              {index === menu.length - 2 && <Divider />}
+            </>
           );
         })}
       </Menu>
@@ -111,14 +114,16 @@ const Menu = styled.div`
   display: flex;
   flex-direction: column;
   font-weight: 500;
+  padding-left: 32px;
+  padding-top: 26px;
 `;
 
 const MenuItem = styled(Link)<{ isActive: boolean }>`
-  padding: 10px 32px;
   display: flex;
   gap: 12px;
   text-decoration: none;
   color: #637381;
+  padding: 10px 0;
 
   ${({ isActive }) =>
     isActive &&
@@ -130,6 +135,7 @@ const MenuItem = styled(Link)<{ isActive: boolean }>`
   span:nth-of-type(2) {
     color: #dc3545;
     margin-left: auto;
+    padding: 0 10px;
   }
 `;
 
@@ -137,4 +143,9 @@ const StyledLogo = styled.div<{ isActive: boolean }>`
   svg {
     color: ${({ isActive }) => (isActive ? "#147D73" : "inherit")};
   }
+`;
+
+const Divider = styled.div`
+  border-bottom: 1px solid #e0e0e0;
+  margin: 10px 0
 `;

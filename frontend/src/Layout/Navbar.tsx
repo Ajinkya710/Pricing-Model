@@ -36,7 +36,7 @@ export default Navbar;
 const NavbarWrapper = styled.div`
   background: #147d73;
   height: 84px;
-  padding: 16px 12px;
+  padding: 0 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;

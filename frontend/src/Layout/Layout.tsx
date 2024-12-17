@@ -41,7 +41,6 @@ const LayoutMain = styled.div`
 `;
 
 const LayoutContent = styled.div`
-  padding: 20px;
-  background-color: #f4f4f4;
+  padding: 26px;
   flex-grow: 1;
 `;
