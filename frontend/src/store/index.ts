@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
-import productSlice from '../Pages/Product/store/slice';
+import pricingSlice from '../Pages/Pricing/store/slice';
 
 const store = configureStore({
   reducer: {
-    product: productSlice
+    pricing: pricingSlice
   },
 });
 

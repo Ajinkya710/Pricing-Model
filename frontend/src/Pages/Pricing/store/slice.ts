@@ -1,15 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface ProductState {
+interface PricingState {
   data: any[];
 }
 
-const initialState: ProductState = {
+const initialState: PricingState = {
     data: [],
 };
 
-const productSlice = createSlice({
-  name: "product",
+const pricingSlice = createSlice({
+  name: "pricing",
   initialState,
   reducers: {
   },
@@ -17,4 +17,4 @@ const productSlice = createSlice({
   },
 });
 
-export default productSlice.reducer;
+export default pricingSlice.reducer;
