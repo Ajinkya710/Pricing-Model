@@ -19,14 +19,12 @@ const Navbar: React.FC = () => {
         <NotiIcon>
           <QuestionLogo />
         </NotiIcon>
-      </NavbarItem>
-      <ProfileSection>
-        <NavbarItem>
+        <div>
           <p>Ekemini Mark</p>
           <p>Heaps Normal</p>
-        </NavbarItem>
+        </div>
         <img src={ProfilePicture} alt="Profile" height={40} width={40} />
-      </ProfileSection>
+      </NavbarItem>
     </NavbarWrapper>
   );
 };
@@ -37,10 +35,14 @@ const NavbarWrapper = styled.div`
   background: #147d73;
   height: 84px;
   padding: 0 12px;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 5fr);
   align-items: center;
   color: #ffffff;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: auto auto auto;
+  }
 `;
 
 const NavbarItem = styled.div`
@@ -53,17 +55,21 @@ const NavbarItem = styled.div`
   p:nth-child(2) {
     font-weight: 400;
     font-size: 12px;
-    justify-self: end;
   }
 
   &:nth-child(2) {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-  }
-
-  &:nth-child(3) {
     justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    div:nth-child(3) {
+      margin-left: 30px;
+    }
+
+    p {
+      text-align: end;
+    }
   }
 `;
 
@@ -76,9 +82,4 @@ const NotiIcon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-
-const ProfileSection = styled.div`
-  display: flex;
-  align-items: center;
 `;
