@@ -2,10 +2,12 @@ import React from "react";
 import Breadcrumbs from "../../Layout/Breadcrumbs";
 import styled from "styled-components";
 import PricingProfile from "./Components/PricingProfile";
+import ProductPricing from "./Components/ProductPricing";
+import AssignCustomer from "./Components/AssignCustomer";
 
 const Pricing = () => {
   return (
-    <React.Fragment>
+    <MainWrapper>
       <PricingWrapper>
         <Breadcrumbs
           items={["Pricing Profile", "Setup a Profile"]}
@@ -17,11 +19,19 @@ const Pricing = () => {
         </Buttons>
       </PricingWrapper>
       <PricingProfile />
-    </React.Fragment>
+      <ProductPricing />
+      <AssignCustomer />
+    </MainWrapper>
   );
 };
 
 export default Pricing;
+
+const MainWrapper = styled.div`
+  padding: 34px 26px 26px;
+  background-color: #f8fafc;
+  border-radius: 16px;
+`;
 
 const PricingWrapper = styled.div`
   display: flex;
