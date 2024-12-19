@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { ReactComponent as RefreshIcon } from "../../../Assets/svg/RefreshIcon.svg";
 import { useSelector } from "react-redux";
 import {
+  selectBasedOnPrice,
   selectInitialData,
   selectNewProfileData,
   selectSelectedPricingAdjustmentMode,
@@ -24,10 +25,19 @@ const PriceTable: React.FC = () => {
   );
 
   const newProfileData = useSelector(selectNewProfileData);
+  const basedOnOptions = initialData?.AllProfiles || [];
+  const basedOnPrice = useSelector(selectBasedOnPrice);
 
   return (
     <TableWrapper>
       <RefreshDiv>
+        <p>
+          ** Note: All the products not selected above will be saved with
+          <span>
+            {` ${basedOnOptions.find((o) => o.id === basedOnPrice)?.name ?? ""} `}
+          </span>{" "}
+          price
+        </p>
         <RefreshButton>
           <span>Refresh New Price Table</span>
           <RefreshIcon />
@@ -128,8 +138,14 @@ const RefreshDiv = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin-bottom: 8px;
+
+  span {
+    color: #212b36;
+    font-weight: 500;
+  }
+  }
 `;
 
 const TableWrapper = styled.div`

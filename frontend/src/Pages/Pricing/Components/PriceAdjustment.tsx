@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useAppDispatch } from "../../../store";
 import { useSelector } from "react-redux";
@@ -31,7 +31,6 @@ const PriceAdjustment = () => {
   const pricingIncrementOptions = useSelector(selectPricingIncrementOptions);
   const initialData = useSelector(selectInitialData);
   const basedOnOptions = initialData?.AllProfiles || [];
-  const [selectedBasedOnLabel, setSelectedBasedOnLabel] = useState("");
   const basedOnPrice = useSelector(selectBasedOnPrice);
 
   return (
@@ -43,15 +42,11 @@ const PriceAdjustment = () => {
         value={basedOnPrice}
         onChange={async (e) => {
           if (e.target.value) {
-            const label =
-              basedOnOptions.find((o) => o.id === e.target.value)?.name ?? "";
-            setSelectedBasedOnLabel(label);
             dispatch(setSelectedBasedOnPrice(e.target.value));
             await dispatch(fetchProfileProductData(e.target.value));
             dispatch(setBasedOnNewProductData(e.target.value));
           } else {
             dispatch(setSelectedBasedOnPrice(""));
-            setSelectedBasedOnLabel("");
           }
         }}
       >
@@ -116,7 +111,9 @@ const PriceAdjustment = () => {
         <LightBulbIcon />
         <CustomText>
           The adjusted price will be calculated from
-          <span>{` ${selectedBasedOnLabel} `}</span>
+          <span>
+            {` ${basedOnOptions.find((o) => o.id === basedOnPrice)?.name ?? ""} `}
+          </span>
           selected above
         </CustomText>
       </WarningDiv>
