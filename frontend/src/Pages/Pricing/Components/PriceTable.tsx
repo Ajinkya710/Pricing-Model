@@ -24,7 +24,7 @@ const PriceTable: React.FC = () => {
   );
 
   const newProfileData = useSelector(selectNewProfileData);
-  
+
   return (
     <TableWrapper>
       <RefreshDiv>
@@ -86,11 +86,17 @@ const PriceTable: React.FC = () => {
                   <input
                     type="number"
                     min={0}
+                    value={
+                      newProfileData.PriceDetails.find(
+                        (d) => d.productId === product.id
+                      )?.adjustment ?? ""
+                    }
                     onChange={(e) => {
+                      const value = Number(e.target.value);
                       dispatch(
                         setAdjustmentNewProductData({
                           recordId: product.id,
-                          value: Number(e.target.value),
+                          value,
                         })
                       );
                     }}
