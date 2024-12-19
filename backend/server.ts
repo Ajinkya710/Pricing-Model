@@ -9,7 +9,10 @@ import swaggerOptions from "./swagger";
 import cors from "cors";
 
 const app: Application = express();
-const PORT = 5000;
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
@@ -23,7 +26,7 @@ app.use("/api/products", productRoutes);
 app.use("/api/pricing", pricingRoutes);
 app.use("/api/profile", profileRoutes);
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-  console.log(`Swagger Docs available at http://localhost:${PORT}/api-docs`);
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Swagger Docs available at http://localhost:${port}/api-docs`);
 });
