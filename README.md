@@ -21,7 +21,8 @@
 **Backend** :     This will start the Django server on http://localhost:8000.
     
 **API** - http://localhost:5000
-**SWAGGER** - [http://localhost:5000](http://localhost:5000/api-docs/)
+
+**SWAGGER** - http://localhost:5000/api-docs/
     
     cd backend
     
