@@ -1,17 +1,44 @@
 type PricingProfileOption = {
   name: string;
   value: PROFILE_TYPE;
-}[]
+}[];
 
 type PricingAdjustmentOptions = {
   name: string;
   value: PRICE_ADJUSTMENT_MODE;
-}[]
+}[];
 
 type PricingIncrementOptions = {
   name: string;
   value: PRICE_INCREMENT_MODE;
-}[]
+}[];
+
+type Product = {
+  id: string;
+  title: string;
+  skuCode: string;
+  brandId: string;
+  categoryId: string;
+  subCategoryId: string;
+  segmentId: string;
+  globalWholesalePrice: number;
+};
+
+type SelectedProduct = {
+  id: string;
+  adjustmentMode: PRICE_ADJUSTMENT_MODE;
+  increamentMode: PRICE_INCREMENT_MODE;
+  adjustmentAmount: number;
+  basedOnAmount: number;
+  newAmount: number;
+}
+
+type SearchQuery = {
+  searchString: string;
+  category: string;
+  segment: string;
+  brand: string;
+};
 
 enum PROFILE_TYPE {
   ONE_PRODUCT = 1,
@@ -94,7 +121,7 @@ type InitialData = {
       name: string;
     }[];
   };
-}
+};
 
 export { PROFILE_TYPE, PRICE_ADJUSTMENT_MODE, PRICE_INCREMENT_MODE };
 export {
@@ -102,4 +129,12 @@ export {
   pricingAdjustmentOptions,
   pricingIncrementOptions,
 };
-export type {InitialData, PricingProfileOption, PricingAdjustmentOptions, PricingIncrementOptions}
+export type {
+  Product,
+  SelectedProduct,
+  InitialData,
+  SearchQuery,
+  PricingProfileOption,
+  PricingAdjustmentOptions,
+  PricingIncrementOptions,
+};

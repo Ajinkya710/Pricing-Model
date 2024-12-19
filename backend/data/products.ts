@@ -91,5 +91,40 @@ export const products: Product[] = [
     globalWholesalePrice: 3.5,
     isValid: true,
   },
+  {
+    id: "p6o7i8u9-y0t1r2e3-w4q5p6a7-s8d9f0g1h2j0",
+    title: "Green Apple",
+    skuCode: "APLGRN001",
+    brandId: "b5r6a7n8-d9e0-1f2g-3h4i-5j6k7l8m9s0t",  // Fresh Farm
+    categoryId: "p6o5n4m3-l2k1j0i9-h8g7f6e5-d4c3b2a1",  // Food
+    subCategoryId: "g1f2e3d4-h5d6-7c8b-9a0j-1i2k3l4m5n6o",  // Fruits
+    segmentId: "s5e6g7m8-e9n0-1t2s-3a4g-b5f6g7h8i9j0",  // Fruit
+    globalWholesalePrice: 4.0,
+    isValid: true,
+  },
+  {
+    id: "p7o8i9u0-y1t2r3e4-w5q6p7a8-s9d0f1g2h3j0",
+    title: "Banana",
+    skuCode: "APLBNN001",
+    brandId: "b5r6a7n8-d9e0-1f2g-3h4i-5j6k7l8m9s0t",  // Fresh Farm
+    categoryId: "p6o5n4m3-l2k1j0i9-h8g7f6e5-d4c3b2a1",  // Food
+    subCategoryId: "g1f2e3d4-h5d6-7c8b-9a0j-1i2k3l4m5n6o",  // Fruits
+    segmentId: "s5e6g7m8-e9n0-1t2s-3a4g-b5f6g7h8i9j0",  // Fruit
+    globalWholesalePrice: 2.5,
+    isValid: true,
+  },
+  // Food -> Biscuits
+  {
+    id: "p8o9i0u1-y2t3r4e5-w6q7p8a9-s0d1f2g3h4j0",
+    title: "McVitie's Digestive Biscuits",
+    skuCode: "MVDGBISCUIT1",
+    brandId: "b8r9a0n1-d2e3-4f5g-6h7i-8j9k0l1m2v3x",  // McVitie's
+    categoryId: "p6o5n4m3-l2k1j0i9-h8g7f6e5-d4c3b2a1",  // Food
+    subCategoryId: "a1b2c3d4-d5e6-7f8g-9h0i-1j2k3l4m5n6p",  // Biscuits
+    segmentId: "s6e7g8m9-e0n1-2t3s-4a5g-b6f7g8h9i0j1",  // Snack
+    globalWholesalePrice: 6.0,
+    isValid: true,
+  },
 ];
+
 

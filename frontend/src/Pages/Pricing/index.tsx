@@ -6,13 +6,9 @@ import ProductPricing from "./Components/ProductPricing";
 import AssignCustomer from "./Components/AssignCustomer";
 import { useAppDispatch } from "../../store";
 import { fetchInitialData } from "./store/action";
-import { useSelector } from "react-redux";
-import { selectInitialData } from "./store/selector";
 
 const Pricing = () => {
   const dispatch = useAppDispatch();
-  const initialData = useSelector(selectInitialData);
-  console.log(initialData);
 
   useEffect(() => {
     const getInitialData = async () => {

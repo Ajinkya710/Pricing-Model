@@ -1,12 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ReactComponent as Search } from "../../../Assets/svg/Search.svg";
+import { selectInitialData } from "../store/selector";
+import { useSelector } from "react-redux";
+import { fetchProductsData } from "../store/action";
+import { useAppDispatch } from "../../../store";
+import ProductsDisplay from "./ProductsDisplay";
 
 const ProductSearch = () => {
+  const dispatch = useAppDispatch();
+  const initialData = useSelector(selectInitialData);
+
+  const categories = initialData?.InitialData.Categories || [];
+  const segments = initialData?.InitialData.Segments || [];
+  const brands = initialData?.InitialData.Brands || [];
+
   const [search1, setSearch1] = useState("");
   const [dropdown1, setDropdown1] = useState("");
   const [dropdown2, setDropdown2] = useState("");
   const [dropdown3, setDropdown3] = useState("");
+
+  useEffect(() => {
+    const getData = async () => {
+      dispatch(fetchProductsData());
+    };
+    getData();
+  }, [dispatch]);
 
   return (
     <React.Fragment>
@@ -22,51 +41,54 @@ const ProductSearch = () => {
             onChange={(e) => setSearch1(e.target.value)}
           />
         </SearchBarContainer>
-
-        {/* Dropdown 1 */}
         <div>
           <Dropdown
-            id="dropdown1"
+            id="category"
             value={dropdown1}
             onChange={(e) => setDropdown1(e.target.value)}
           >
             <option value="">Category</option>
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
+            {categories.map((category) => (
+              <optgroup key={category.id} label={category.name}>
+                {category.subCategories.map((subCategory) => (
+                  <option key={subCategory.id} value={subCategory.id}>
+                    {subCategory.name}
+                  </option>
+                ))}
+              </optgroup>
+            ))}
           </Dropdown>
         </div>
-
-        {/* Dropdown 2 */}
         <div>
           <Dropdown
-            id="dropdown2"
+            id="segment"
             value={dropdown2}
             onChange={(e) => setDropdown2(e.target.value)}
           >
             <option value="">Segment</option>
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
+            {segments.map((segment) => (
+              <option key={segment.id} value={segment.id}>
+                {segment.name}
+              </option>
+            ))}
           </Dropdown>
         </div>
-
-        {/* Dropdown 3 */}
         <div>
           <Dropdown
-            id="dropdown3"
+            id="brand"
             value={dropdown3}
             onChange={(e) => setDropdown3(e.target.value)}
           >
             <option value="">Brand</option>
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
+            {brands.map((brand) => (
+              <option key={brand.id} value={brand.id}>
+                {brand.name}
+              </option>
+            ))}
           </Dropdown>
         </div>
       </ProductSearchWrapper>
-      <p>Showing 6 Result for Product Name or SKU Code</p>
-      <p>You’ve selected 3 Products, these will be added Profile Name</p>
+      <ProductsDisplay />
     </React.Fragment>
   );
 };

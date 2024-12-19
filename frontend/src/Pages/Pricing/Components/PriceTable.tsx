@@ -1,65 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { ReactComponent as RefreshIcon } from "../../../Assets/svg/RefreshIcon.svg";
-
-interface Product {
-  id: number;
-  title: string;
-  sku: string;
-  category: string;
-  price: number;
-  adjustment: number;
-}
-
+import { useSelector } from "react-redux";
+import { selectInitialData, selectSelectedProducts } from "../store/selector";
 const PriceTable: React.FC = () => {
-  const [products, setProducts] = useState<Product[]>([
-    {
-      id: 1,
-      title: "Product A",
-      sku: "SKU001",
-      category: "Category 1",
-      price: 100,
-      adjustment: 0,
-    },
-    {
-      id: 2,
-      title: "Product B",
-      sku: "SKU002",
-      category: "Category 2",
-      price: 200,
-      adjustment: 0,
-    },
-    {
-      id: 3,
-      title: "Product C",
-      sku: "SKU003",
-      category: "Category 3",
-      price: 300,
-      adjustment: 0,
-    },
-  ]);
-
-  const [selectAll, setSelectAll] = useState(false);
-  const [selectedRows, setSelectedRows] = useState<number[]>([]);
-
-  const handleSelectAll = () => {
-    setSelectAll(!selectAll);
-    setSelectedRows(selectAll ? [] : products.map((product) => product.id));
-  };
-
-  const handleRowSelect = (id: number) => {
-    setSelectedRows((prev) =>
-      prev.includes(id) ? prev.filter((rowId) => rowId !== id) : [...prev, id]
-    );
-  };
-
-  const handleAdjustmentChange = (id: number, value: number) => {
-    setProducts((prevProducts) =>
-      prevProducts.map((product) =>
-        product.id === id ? { ...product, adjustment: value } : product
-      )
-    );
-  };
+  const selectedProducts = useSelector(selectSelectedProducts);
+  const initialData = useSelector(selectInitialData);
 
   return (
     <TableWrapper>
@@ -75,8 +21,8 @@ const PriceTable: React.FC = () => {
             <th>
               <input
                 type="checkbox"
-                checked={selectAll}
-                onChange={handleSelectAll}
+                // checked={selectAll}
+                // onChange={handleSelectAll}
               />
             </th>
             <th>Product Title</th>
@@ -88,33 +34,39 @@ const PriceTable: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => (
+          {selectedProducts.map((product) => (
             <tr key={product.id}>
               <td>
                 <input
                   type="checkbox"
-                  checked={selectedRows.includes(product.id)}
-                  onChange={() => handleRowSelect(product.id)}
+                  // checked={selectedRows.includes(product.id)}
+                  // onChange={() => handleRowSelect(product.id)}
                 />
               </td>
               <td>{product.title}</td>
-              <td>{product.sku}</td>
-              <td>{product.category}</td>
-              <td>${product.price.toFixed(2)}</td>
+              <td>{product.skuCode}</td>
+              <td>
+                {
+                  initialData?.InitialData.Categories.find(
+                    (d) => d.id === product.categoryId
+                  )?.name
+                }
+              </td>
+              <td>${(0).toFixed(2)}</td>
               <td>
                 $
                 <input
                   type="number"
-                  value={product.adjustment}
-                  onChange={(e) =>
-                    handleAdjustmentChange(
-                      product.id,
-                      parseFloat(e.target.value) || 0
-                    )
-                  }
+                  // value={product.adjustment}
+                  // onChange={(e) =>
+                  //   handleAdjustmentChange(
+                  //     product.id,
+                  //     parseFloat(e.target.value) || 0
+                  //   )
+                  // }
                 />
               </td>
-              <td>${(product.price + product.adjustment).toFixed(2)}</td>
+              <td>${(0).toFixed(2)}</td>
             </tr>
           ))}
         </tbody>
