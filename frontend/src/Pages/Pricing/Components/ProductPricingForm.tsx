@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import {
+  selectNewProfileData,
   selectPricingProfileOptions,
   selectSelectedPricingProfile,
 } from "../store/selector";
 import { useAppDispatch } from "../../../store";
-import { setSelectedPricingProfile } from "../store/slice";
+import { setIsComplete, setSelectedPricingProfile } from "../store/slice";
 import React from "react";
 import ProductSearch from "./ProductSearch";
 import PriceAdjustment from "./PriceAdjustment";
@@ -15,6 +16,7 @@ const ProductPricingForm = () => {
   const dispatch = useAppDispatch();
   const selectedPricingProfile = useSelector(selectSelectedPricingProfile);
   const pricingProfileOptions = useSelector(selectPricingProfileOptions);
+  const newProfileData = useSelector(selectNewProfileData);
 
   return (
     <ProductPricingFormWrapper>
@@ -49,7 +51,14 @@ const ProductPricingForm = () => {
         <p>Your entries are saved automatically</p>
         <Buttons>
           <BackButton>Back</BackButton>
-          <NextButton>Next</NextButton>
+          <NextButton
+            onClick={() => {
+              dispatch(setIsComplete(true));
+              console.log(newProfileData);
+            }}
+          >
+            Next
+          </NextButton>
         </Buttons>
       </ButtonsDiv>
     </ProductPricingFormWrapper>

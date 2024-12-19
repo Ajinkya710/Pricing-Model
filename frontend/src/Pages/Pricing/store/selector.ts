@@ -22,6 +22,10 @@ const selectSearchProductData = (state: RootState) => state.pricing.searchProduc
 
 const selectSelectedProducts = (state: RootState) => state.pricing.selectedProducts;
 
+const selectNewProfileData = (state: RootState) => state.pricing.newProfileData;
+
+const selectIsComplete = (state: RootState) => state.pricing.isComplete;
+
 export {
   selectSelectedPricingProfile,
   selectPricingProfileOptions,
@@ -32,4 +36,6 @@ export {
   selectInitialData,
   selectSearchProductData,
   selectSelectedProducts,
+  selectNewProfileData,
+  selectIsComplete
 };

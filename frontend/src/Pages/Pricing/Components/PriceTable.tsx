@@ -4,13 +4,16 @@ import { ReactComponent as RefreshIcon } from "../../../Assets/svg/RefreshIcon.s
 import { useSelector } from "react-redux";
 import {
   selectInitialData,
+  selectNewProfileData,
   selectSelectedPricingAdjustmentMode,
   selectSelectedPricingIncrementMode,
   selectSelectedProducts,
 } from "../store/selector";
 import { PRICE_ADJUSTMENT_MODE, PRICE_INCREMENT_MODE } from "../store/types";
-import { calculateNewPrice } from "../../../helper";
+import { setAdjustmentNewProductData } from "../store/slice";
+import { useAppDispatch } from "../../../store";
 const PriceTable: React.FC = () => {
+  const dispatch = useAppDispatch();
   const selectedProducts = useSelector(selectSelectedProducts);
   const initialData = useSelector(selectInitialData);
   const selectedPricingAdjustmentMode = useSelector(
@@ -19,6 +22,8 @@ const PriceTable: React.FC = () => {
   const selectedPricingIncrementMode = useSelector(
     selectSelectedPricingIncrementMode
   );
+
+  const newProfileData = useSelector(selectNewProfileData);
 
   return (
     <TableWrapper>
@@ -33,11 +38,7 @@ const PriceTable: React.FC = () => {
           <tr>
             <th>
               <CheckboxWrapper>
-                <StyledCheckbox
-                  type="checkbox"
-                  // checked={selectAll}
-                  // onChange={handleSelectAll}
-                />
+                <StyledCheckbox type="checkbox" />
               </CheckboxWrapper>
             </th>
             <th>Product Title</th>
@@ -54,11 +55,7 @@ const PriceTable: React.FC = () => {
               <tr key={product.id}>
                 <td>
                   <CheckboxWrapper>
-                    <StyledCheckbox
-                      type="checkbox"
-                      // checked={selectedRows.includes(product.id)}
-                      // onChange={() => handleRowSelect(product.id)}
-                    />
+                    <StyledCheckbox type="checkbox" />
                   </CheckboxWrapper>
                 </td>
                 <td>{product.title}</td>
@@ -70,7 +67,14 @@ const PriceTable: React.FC = () => {
                     )?.name
                   }
                 </td>
-                <td>${(0).toFixed(2)}</td>
+                <td>
+                  $
+                  {
+                    newProfileData.PriceDetails.find(
+                      (data) => data.productId === product.id
+                    )?.amount
+                  }
+                </td>
                 <td>
                   {selectedPricingIncrementMode ===
                   PRICE_INCREMENT_MODE.INCREASE
@@ -82,19 +86,23 @@ const PriceTable: React.FC = () => {
                   <input
                     type="number"
                     min={0}
-                    // onChange={(e) =>
-                    //   //
-                    // }
+                    onChange={(e) => {
+                      dispatch(
+                        setAdjustmentNewProductData({
+                          recordId: product.id,
+                          value: Number(e.target.value),
+                        })
+                      );
+                    }}
                   />
                 </td>
                 <td>
                   $
-                  {calculateNewPrice({
-                    basedOnPrice: 0,
-                    adjustment: 50,
-                    adjustmentMode: selectedPricingAdjustmentMode,
-                    incrementMode: selectedPricingIncrementMode,
-                  }).toFixed(2)}
+                  {
+                    newProfileData.PriceDetails.find(
+                      (data) => data.productId === product.id
+                    )?.newAmount
+                  }
                 </td>
               </tr>
             );

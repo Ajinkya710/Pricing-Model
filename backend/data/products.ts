@@ -128,6 +128,9 @@ export const profiles: Profiles[] = [
     name: "Global Wholesale Price",
     expDate: new Date("2024-12-31T23:59:59Z"), // Example expiration date
     status: 1,
+    basedOn: null,
+    adjustmentMode: null,
+    increamentMode: null,
     isValid: true,
   },
 ];

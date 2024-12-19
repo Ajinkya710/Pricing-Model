@@ -30,7 +30,7 @@ type SelectedProduct = {
   adjustmentAmount: number;
   basedOnAmount: number;
   newAmount: number;
-}
+};
 
 type SearchQuery = {
   searchString: string;
@@ -102,8 +102,11 @@ type Profiles = {
   name: string;
   expDate: Date;
   status: PROFILE_STATUS;
+  basedOn: string | null;
+  adjustmentMode: PRICE_ADJUSTMENT_MODE | null;
+  increamentMode: PRICE_INCREMENT_MODE | null;
   isValid: boolean;
-}
+};
 
 type InitialData = {
   ProfileData: Profiles;
@@ -128,7 +131,22 @@ type InitialData = {
   AllProfiles: Partial<Profiles>[];
 };
 
-export { PROFILE_TYPE, PRICE_ADJUSTMENT_MODE, PRICE_INCREMENT_MODE };
+type PricingDetail = {
+  id: string;
+  productId: string;
+  profileId: string;
+  amount: number;
+  adjustment: number;
+  newAmount: number;
+  isValid: boolean;
+};
+
+type NewProfileData = {
+  ProfileData: Profiles;
+  PriceDetails: PricingDetail[];
+};
+
+export { PROFILE_TYPE, PRICE_ADJUSTMENT_MODE, PRICE_INCREMENT_MODE, PROFILE_STATUS };
 export {
   pricingProfileOptions,
   pricingAdjustmentOptions,
@@ -143,4 +161,6 @@ export type {
   PricingProfileOption,
   PricingAdjustmentOptions,
   PricingIncrementOptions,
+  PricingDetail,
+  NewProfileData
 };

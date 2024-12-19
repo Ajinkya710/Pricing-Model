@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useAppDispatch } from "../../../store";
 import { useSelector } from "react-redux";
@@ -28,6 +28,7 @@ const PriceAdjustment = () => {
   const pricingIncrementOptions = useSelector(selectPricingIncrementOptions);
   const initialData = useSelector(selectInitialData);
   const basedOnOptions = initialData?.AllProfiles || [];
+  const [selectedBasedOn, setSelectedBasedOn] = useState("");
 
   return (
     <div>
@@ -37,7 +38,12 @@ const PriceAdjustment = () => {
         id="based"
         onChange={async (e) => {
           if (e.target.value) {
+            const label =
+              basedOnOptions.find((o) => o.id === e.target.value)?.name ?? "";
+            setSelectedBasedOn(label);
             await dispatch(fetchProfileProductData(e.target.value));
+          } else {
+            setSelectedBasedOn("");
           }
         }}
       >
@@ -101,8 +107,9 @@ const PriceAdjustment = () => {
       <WarningDiv>
         <LightBulbIcon />
         <CustomText>
-          The adjusted price will be calculated from Based on Price selected
-          above
+          The adjusted price will be calculated from
+          <span>{` ${selectedBasedOn} `}</span>
+          selected above
         </CustomText>
       </WarningDiv>
     </div>
@@ -173,6 +180,11 @@ export const CustomRadio = styled.span<{ checked: boolean }>`
 
 const CustomText = styled.p`
   color: #a26306;
+
+  span {
+    color: #212b36;
+    font-weight: 500;
+  }
 `;
 
 const OptionDivider = styled.div`

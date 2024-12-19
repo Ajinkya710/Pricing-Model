@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   InitialData,
+  NewProfileData,
   PRICE_ADJUSTMENT_MODE,
   PRICE_INCREMENT_MODE,
   PricingAdjustmentOptions,
@@ -10,6 +11,7 @@ import {
   PricingProfileOption,
   pricingProfileOptions,
   Product,
+  PROFILE_STATUS,
   PROFILE_TYPE,
   SearchQuery,
   SelectedProduct,
@@ -19,6 +21,7 @@ import {
   fetchProductsData,
   fetchProfileProductData,
 } from "./action";
+import { calculateNewPrice } from "../../../helper";
 
 interface PricingState {
   initialData: InitialData | null;
@@ -32,6 +35,8 @@ interface PricingState {
   searchProductData: Product[];
   selectedProducts: Product[];
   adjustedProductData: SelectedProduct[];
+  newProfileData: NewProfileData;
+  isComplete: boolean;
 }
 
 const initialState: PricingState = {
@@ -51,6 +56,20 @@ const initialState: PricingState = {
   searchProductData: [],
   selectedProducts: [],
   adjustedProductData: [],
+  newProfileData: {
+    ProfileData: {
+      id: "",
+      name: "",
+      expDate: new Date(),
+      status: PROFILE_STATUS.NOT_COMPLETE,
+      basedOn: null,
+      adjustmentMode: null,
+      increamentMode: null,
+      isValid: false,
+    },
+    PriceDetails: [],
+  },
+  isComplete: false,
 };
 
 const pricingSlice = createSlice({
@@ -95,11 +114,35 @@ const pricingSlice = createSlice({
     deselectAllProducts: (state) => {
       state.selectedProducts = [];
     },
+    setIsComplete: (state, action: PayloadAction<boolean>) => {
+      state.isComplete = action.payload
+    },
+    setAdjustmentNewProductData: (
+      state,
+      action: PayloadAction<{ recordId: string; value: number }>
+    ) => {
+      const { recordId, value } = action.payload;
+      const pricingDetails = state.newProfileData.PriceDetails;
+      const adjustmentMode = state.selectedPricingAdjustmentMode;
+      const incrementMode = state.selectedPricingIncrementMode;
+
+      const product = pricingDetails.find((p) => p.productId === recordId);
+      if (product) {
+        product.adjustment = value;
+        product.newAmount = calculateNewPrice({
+          basedOnPrice: product.amount,
+          adjustment: value,
+          adjustmentMode: adjustmentMode,
+          incrementMode: incrementMode,
+        })
+      }
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchInitialData.fulfilled, (state, action: any) => {
         state.initialData = action.payload;
+        state.newProfileData.ProfileData = action.payload.ProfileData;
       })
       .addCase(fetchInitialData.rejected, (state, _) => {
         state.initialData = null;
@@ -111,10 +154,10 @@ const pricingSlice = createSlice({
         state.searchProductData = [];
       })
       .addCase(fetchProfileProductData.fulfilled, (state, action: any) => {
-        // state.searchProductData = action.payload;
+        state.newProfileData.PriceDetails = action.payload.pricingDetails;
       })
       .addCase(fetchProfileProductData.rejected, (state, _) => {
-        // state.searchProductData = [];
+        state.newProfileData.PriceDetails = [];
       });
   },
 });
@@ -127,6 +170,7 @@ export const {
   selectAllProducts,
   deselectAllProducts,
   setSearchQuery,
+  setIsComplete,
+  setAdjustmentNewProductData,
 } = pricingSlice.actions;
-
 export default pricingSlice.reducer;

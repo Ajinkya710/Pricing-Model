@@ -18,6 +18,9 @@ export class PricingService {
         name: "Heaps Normal #4",
         expDate: new Date("2024-12-31T23:59:59Z"),
         status: PROFILE_STATUS.COMPLETE,
+        basedOn: null,
+        adjustmentMode: null,
+        increamentMode: null,
         isValid: true,
       },
       InitialData: {
