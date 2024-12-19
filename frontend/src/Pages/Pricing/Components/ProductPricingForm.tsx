@@ -54,7 +54,6 @@ const ProductPricingForm = () => {
           <NextButton
             onClick={() => {
               dispatch(setIsComplete(true));
-              console.log(newProfileData);
             }}
           >
             Next

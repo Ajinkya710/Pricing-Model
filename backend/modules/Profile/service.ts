@@ -45,10 +45,14 @@ export class ProfileService {
       isValid: true,
     };
 
-    console.log(profileData)
     const index = profiles.findIndex((p) => p.id === profileId);
     if (index !== -1) {
       profiles[index] = { ...profiles[index], ...profileData };
+    }
+
+    const newPricingData = data.PriceDetails;
+    for (const pricing of newPricingData) {
+      pricingDetail.push(pricing);
     }
 
     return true;

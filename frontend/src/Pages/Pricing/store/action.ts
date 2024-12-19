@@ -66,8 +66,15 @@ export const saveProfileData = createAsyncThunk<
   const state = getState();
   const data = state.pricing.newProfileData;
   const profileData = data.ProfileData;
+  const pricingData = data.PriceDetails;
   const adjustmentMode = state.pricing.selectedPricingAdjustmentMode;
   const increamentMode = state.pricing.selectedPricingIncrementMode;
+  const profileId = state.pricing.initialData?.ProfileData.id;
+
+  const newPricingData = pricingData.map((data) => ({
+    ...data,
+    profileId,
+  }));
 
   const newProfileData = {
     ...profileData,
@@ -78,6 +85,7 @@ export const saveProfileData = createAsyncThunk<
   const newData = {
     ...data,
     ProfileData: newProfileData,
+    PriceDetails: newPricingData,
   };
 
   const response = await axios.post(
