@@ -6,7 +6,7 @@
 
     cd Pricing-Model
 
-**Create .env in the frontend directory
+**Create .env in the frontend directory**
 
     cd frontend
     
