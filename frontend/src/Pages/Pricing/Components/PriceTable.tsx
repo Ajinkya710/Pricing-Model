@@ -24,7 +24,7 @@ const PriceTable: React.FC = () => {
   );
 
   const newProfileData = useSelector(selectNewProfileData);
-
+  console.log(selectedProducts);
   return (
     <TableWrapper>
       <RefreshDiv>

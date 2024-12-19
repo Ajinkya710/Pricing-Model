@@ -187,4 +187,5 @@ export const {
   setAdjustmentNewProductData,
   setBasedOnNewProductData,
 } = pricingSlice.actions;
+
 export default pricingSlice.reducer;

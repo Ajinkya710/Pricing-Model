@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import {
-  selectNewProfileData,
   selectPricingProfileOptions,
   selectSelectedPricingProfile,
 } from "../store/selector";
@@ -16,7 +15,6 @@ const ProductPricingForm = () => {
   const dispatch = useAppDispatch();
   const selectedPricingProfile = useSelector(selectSelectedPricingProfile);
   const pricingProfileOptions = useSelector(selectPricingProfileOptions);
-  const newProfileData = useSelector(selectNewProfileData);
 
   return (
     <ProductPricingFormWrapper>

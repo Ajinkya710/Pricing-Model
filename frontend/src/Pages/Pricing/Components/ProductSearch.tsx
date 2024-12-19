@@ -25,7 +25,6 @@ const ProductSearch = () => {
   return (
     <React.Fragment>
       <ProductSearchWrapper>
-        {/* First Search Bar */}
         <SearchBarContainer>
           <SearchIcon />
           <SearchBar

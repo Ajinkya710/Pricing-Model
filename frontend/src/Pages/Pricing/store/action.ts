@@ -7,8 +7,6 @@ import API_URL from "../../../http";
 export const fetchInitialData = createAsyncThunk<InitialData>(
   "fetchInitialData",
   async () => {
-    console.log(API_URL);
-
     const response = await axios.get(`${API_URL}/api/pricing/initial-data`, {
       headers: {
         "Content-Type": "application/json",
