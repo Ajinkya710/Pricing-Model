@@ -1,6 +1,7 @@
 import {
   brands,
   categories,
+  profiles,
   segments,
   subCategories,
 } from "../../data/products";
@@ -14,7 +15,10 @@ export class PricingService {
     return {
       ProfileData: {
         id: "a1b2c3d4-d5e6-7f8g-9h0i-1j2k3l4m5n6p",
+        name: "Heaps Normal #4",
+        expDate: new Date("2024-12-31T23:59:59Z"),
         status: PROFILE_STATUS.COMPLETE,
+        isValid: true,
       },
       InitialData: {
         Categories: categories.map((category) => ({
@@ -36,6 +40,10 @@ export class PricingService {
           name: brand.name,
         })),
       },
+      AllProfiles: profiles.map((profile) => ({
+        id: profile.id,
+        name: profile.name,
+      }))
     };
   }
 }

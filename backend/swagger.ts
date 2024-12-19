@@ -108,7 +108,7 @@ const swaggerOptions: SwaggerOptions = {
       },
     },
   },
-  apis: ["./modules/Pricing/*.ts", "./modules/Products/*.ts"], // Ensure this points to the correct path for your API routes
+  apis: ["./modules/Pricing/*.ts", "./modules/Products/*.ts", "./modules/Profile/*.ts"], // Ensure this points to the correct path for your API routes
 };
 
 export default swaggerOptions;

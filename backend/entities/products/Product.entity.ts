@@ -6,7 +6,6 @@ export interface Product {
     categoryId: string;
     subCategoryId: string;
     segmentId: string;
-    globalWholesalePrice: number;
     isValid: boolean;
   }
   

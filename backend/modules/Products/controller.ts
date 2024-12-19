@@ -68,7 +68,6 @@ export class ProductController {
         categoryId,
         subCategoryId,
         segmentId,
-        globalWholesalePrice,
       });
       res.status(201).json(newProduct);
     }

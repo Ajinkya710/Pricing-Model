@@ -1,8 +1,7 @@
+import { Profiles } from "../profile/Profile.entity";
+
 export interface InitialData {
-  ProfileData: {
-    id: string;
-    status: PROFILE_STATUS;
-  };
+  ProfileData: Profiles;
   InitialData: {
     Categories: {
       id: string;
@@ -21,6 +20,7 @@ export interface InitialData {
       name: string;
     }[];
   };
+  AllProfiles: Partial<Profiles>[];
 }
 
 export enum PROFILE_STATUS {

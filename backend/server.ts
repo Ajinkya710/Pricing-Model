@@ -4,6 +4,7 @@ import swaggerJsDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import productRoutes from "./modules/Products/routes";
 import pricingRoutes from "./modules/Pricing/routes";
+import profileRoutes from "./modules/Profile/routes";
 import swaggerOptions from "./swagger";
 import cors from "cors";
 
@@ -20,6 +21,7 @@ app.use(bodyParser.json());
 // Routes
 app.use("/api/products", productRoutes);
 app.use("/api/pricing", pricingRoutes);
+app.use("/api/profile", profileRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

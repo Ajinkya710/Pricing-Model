@@ -75,14 +75,14 @@ const Sidebar: React.FC = () => {
         {menu.map((item, index) => {
           const isActive = location.pathname === item.url;
           return (
-            <>
+            <React.Fragment>
               <MenuItem key={index} to={item.url} isActive={isActive}>
                 <StyledLogo isActive={isActive}>{item.logo}</StyledLogo>
                 <span>{item.name}</span>
                 {item.isNew && <span>NEW</span>}
               </MenuItem>
               {index === menu.length - 2 && <Divider />}
-            </>
+            </React.Fragment>
           );
         })}
       </Menu>

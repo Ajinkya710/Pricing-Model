@@ -21,7 +21,6 @@ type Product = {
   categoryId: string;
   subCategoryId: string;
   segmentId: string;
-  globalWholesalePrice: number;
 };
 
 type SelectedProduct = {
@@ -98,11 +97,16 @@ const pricingIncrementOptions = [
   },
 ];
 
+type Profiles = {
+  id: string;
+  name: string;
+  expDate: Date;
+  status: PROFILE_STATUS;
+  isValid: boolean;
+}
+
 type InitialData = {
-  ProfileData: {
-    id: string;
-    status: PROFILE_STATUS;
-  };
+  ProfileData: Profiles;
   InitialData: {
     Categories: {
       id: string;
@@ -121,6 +125,7 @@ type InitialData = {
       name: string;
     }[];
   };
+  AllProfiles: Partial<Profiles>[];
 };
 
 export { PROFILE_TYPE, PRICE_ADJUSTMENT_MODE, PRICE_INCREMENT_MODE };
@@ -130,6 +135,7 @@ export {
   pricingIncrementOptions,
 };
 export type {
+  Profiles,
   Product,
   SelectedProduct,
   InitialData,

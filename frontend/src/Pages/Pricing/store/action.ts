@@ -41,3 +41,19 @@ export const fetchProductsData = createAsyncThunk<
 
   return response.data;
 });
+
+export const fetchProfileProductData = createAsyncThunk<InitialData, string>(
+  "fetchProfileProductData",
+  async (id: string) => {
+    const response = await axios.get(
+      `http://localhost:5000/api/profile/${id}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    return response.data;
+  }
+);

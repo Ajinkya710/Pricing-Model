@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useAppDispatch } from "../../../store";
 import { useSelector } from "react-redux";
 import {
+  selectInitialData,
   selectPricingAdjustmentOptions,
   selectPricingIncrementOptions,
   selectSelectedPricingAdjustmentMode,
@@ -13,6 +14,7 @@ import {
   setSelectedPricingIncrementMode,
 } from "../store/slice";
 import { ReactComponent as LightBulbIcon } from "../../../Assets/svg/LightbulbFilament.svg";
+import { fetchProfileProductData } from "../store/action";
 
 const PriceAdjustment = () => {
   const dispatch = useAppDispatch();
@@ -24,24 +26,32 @@ const PriceAdjustment = () => {
   );
   const pricingAdjustmentOptions = useSelector(selectPricingAdjustmentOptions);
   const pricingIncrementOptions = useSelector(selectPricingIncrementOptions);
+  const initialData = useSelector(selectInitialData);
+  const basedOnOptions = initialData?.AllProfiles || [];
+
   return (
     <div>
       <Divider />
       <p>Based On</p>
       <Dropdown
-        id="dropdown"
-        // value={dropdown3}
-        // onChange={(e) => setDropdown3(e.target.value)}
+        id="based"
+        onChange={async (e) => {
+          if (e.target.value) {
+            await dispatch(fetchProfileProductData(e.target.value));
+          }
+        }}
       >
-        <option value="">Brand</option>
-        <option value="option1">Option 1</option>
-        <option value="option2">Option 2</option>
-        <option value="option3">Option 3</option>
+        <option value="">Based on Price</option>
+        {basedOnOptions.map((option) => (
+          <option key={option.id} value={option.id}>
+            {option.name}
+          </option>
+        ))}
       </Dropdown>
       <p>Set Price Adjustment Mode</p>
       <RadioGroup>
         {pricingAdjustmentOptions.map((adjustmentMode, index) => (
-          <React.Fragment>
+          <React.Fragment key={index}>
             <Label>
               <RadioInput
                 type="radio"
@@ -66,7 +76,7 @@ const PriceAdjustment = () => {
       <p>Set Price Adjustment Increment Mode </p>
       <RadioGroup>
         {pricingIncrementOptions.map((incrementOption, index) => (
-          <React.Fragment>
+          <React.Fragment key={index}>
             <Label>
               <RadioInput
                 type="radio"

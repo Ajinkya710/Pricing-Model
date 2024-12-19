@@ -21,7 +21,7 @@ const ProductPricingForm = () => {
       <p>You are creating a Pricing Profile for</p>
       <RadioGroup>
         {pricingProfileOptions.map((pricingProfile, index) => (
-          <React.Fragment>
+          <React.Fragment key={index}>
             <Label>
               <RadioInput
                 type="radio"

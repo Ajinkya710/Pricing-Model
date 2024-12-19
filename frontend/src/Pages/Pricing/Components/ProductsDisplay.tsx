@@ -31,6 +31,7 @@ const ProductsDisplay = () => {
       dispatch(selectAllProducts());
     } else if (selectedPricingProfile === PROFILE_TYPE.MULTIPLE_PRODUCT) {
       setProductSelection("none");
+      dispatch(deselectAllProducts());
     }
   }, [dispatch, selectedPricingProfile]);
 
@@ -49,7 +50,12 @@ const ProductsDisplay = () => {
         Showing {searchProductData.length} Results for Product Name or SKU Code
       </p>
       <RadioGroup>
-        <Label>
+        <Label
+          disabled={
+            selectedPricingProfile === PROFILE_TYPE.ONE_PRODUCT ||
+            selectedPricingProfile === PROFILE_TYPE.ALL_PRODUCT
+          }
+        >
           <RadioInput
             type="radio"
             name="productSelection"
@@ -64,11 +70,17 @@ const ProductsDisplay = () => {
               dispatch(deselectAllProducts());
             }}
           />
-          <CustomRadio checked={productSelection === "none"} />
+          <CustomRadio
+            checked={productSelection === "none"}
+            disabled={
+              selectedPricingProfile === PROFILE_TYPE.ONE_PRODUCT ||
+              selectedPricingProfile === PROFILE_TYPE.ALL_PRODUCT
+            }
+          />
           Deselect All
         </Label>
         <Divider />
-        <Label>
+        <Label disabled={selectedPricingProfile === PROFILE_TYPE.ONE_PRODUCT}>
           <RadioInput
             type="radio"
             name="productSelection"
@@ -80,7 +92,10 @@ const ProductsDisplay = () => {
               dispatch(selectAllProducts());
             }}
           />
-          <CustomRadio checked={productSelection === "all"} />
+          <CustomRadio
+            checked={productSelection === "all"}
+            disabled={selectedPricingProfile === PROFILE_TYPE.ONE_PRODUCT}
+          />
           Select All
         </Label>
       </RadioGroup>
@@ -197,13 +212,18 @@ export const RadioGroup = styled.div`
   margin-bottom: 26px;
 `;
 
-export const Label = styled.label`
+export const Label = styled.label<{ disabled?: boolean }>`
   display: flex;
   align-items: center;
   cursor: pointer;
+
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
 `;
 
-export const CustomRadio = styled.span<{ checked: boolean }>`
+export const CustomRadio = styled.span<{
+  checked: boolean;
+  disabled?: boolean;
+}>`
   width: 16px;
   height: 16px;
   border-radius: 50%;
@@ -212,6 +232,7 @@ export const CustomRadio = styled.span<{ checked: boolean }>`
   margin-right: 8px;
   position: relative;
   background-color: ${({ checked }) => (checked ? "#08822A" : "transparent")};
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
 
   &::after {
     content: "";

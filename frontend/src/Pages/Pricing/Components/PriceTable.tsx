@@ -2,10 +2,23 @@ import React from "react";
 import styled from "styled-components";
 import { ReactComponent as RefreshIcon } from "../../../Assets/svg/RefreshIcon.svg";
 import { useSelector } from "react-redux";
-import { selectInitialData, selectSelectedProducts } from "../store/selector";
+import {
+  selectInitialData,
+  selectSelectedPricingAdjustmentMode,
+  selectSelectedPricingIncrementMode,
+  selectSelectedProducts,
+} from "../store/selector";
+import { PRICE_ADJUSTMENT_MODE, PRICE_INCREMENT_MODE } from "../store/types";
+import { calculateNewPrice } from "../../../helper";
 const PriceTable: React.FC = () => {
   const selectedProducts = useSelector(selectSelectedProducts);
   const initialData = useSelector(selectInitialData);
+  const selectedPricingAdjustmentMode = useSelector(
+    selectSelectedPricingAdjustmentMode
+  );
+  const selectedPricingIncrementMode = useSelector(
+    selectSelectedPricingIncrementMode
+  );
 
   return (
     <TableWrapper>
@@ -19,11 +32,13 @@ const PriceTable: React.FC = () => {
         <thead>
           <tr>
             <th>
-              <input
-                type="checkbox"
-                // checked={selectAll}
-                // onChange={handleSelectAll}
-              />
+              <CheckboxWrapper>
+                <StyledCheckbox
+                  type="checkbox"
+                  // checked={selectAll}
+                  // onChange={handleSelectAll}
+                />
+              </CheckboxWrapper>
             </th>
             <th>Product Title</th>
             <th>SKU Code</th>
@@ -34,41 +49,56 @@ const PriceTable: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {selectedProducts.map((product) => (
-            <tr key={product.id}>
-              <td>
-                <input
-                  type="checkbox"
-                  // checked={selectedRows.includes(product.id)}
-                  // onChange={() => handleRowSelect(product.id)}
-                />
-              </td>
-              <td>{product.title}</td>
-              <td>{product.skuCode}</td>
-              <td>
-                {
-                  initialData?.InitialData.Categories.find(
-                    (d) => d.id === product.categoryId
-                  )?.name
-                }
-              </td>
-              <td>${(0).toFixed(2)}</td>
-              <td>
-                $
-                <input
-                  type="number"
-                  // value={product.adjustment}
-                  // onChange={(e) =>
-                  //   handleAdjustmentChange(
-                  //     product.id,
-                  //     parseFloat(e.target.value) || 0
-                  //   )
-                  // }
-                />
-              </td>
-              <td>${(0).toFixed(2)}</td>
-            </tr>
-          ))}
+          {selectedProducts.map((product) => {
+            return (
+              <tr key={product.id}>
+                <td>
+                  <CheckboxWrapper>
+                    <StyledCheckbox
+                      type="checkbox"
+                      // checked={selectedRows.includes(product.id)}
+                      // onChange={() => handleRowSelect(product.id)}
+                    />
+                  </CheckboxWrapper>
+                </td>
+                <td>{product.title}</td>
+                <td>{product.skuCode}</td>
+                <td>
+                  {
+                    initialData?.InitialData.Categories.find(
+                      (d) => d.id === product.categoryId
+                    )?.name
+                  }
+                </td>
+                <td>${(0).toFixed(2)}</td>
+                <td>
+                  {selectedPricingIncrementMode ===
+                  PRICE_INCREMENT_MODE.INCREASE
+                    ? "+"
+                    : "-"}
+                  {selectedPricingAdjustmentMode === PRICE_ADJUSTMENT_MODE.FIXED
+                    ? "$"
+                    : "%"}
+                  <input
+                    type="number"
+                    min={0}
+                    // onChange={(e) =>
+                    //   //
+                    // }
+                  />
+                </td>
+                <td>
+                  $
+                  {calculateNewPrice({
+                    basedOnPrice: 0,
+                    adjustment: 50,
+                    adjustmentMode: selectedPricingAdjustmentMode,
+                    incrementMode: selectedPricingIncrementMode,
+                  }).toFixed(2)}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
       {selectedProducts.length === 0 && (
@@ -180,4 +210,25 @@ const NoProducts = styled.div`
 
   color: #212b36;
   padding-top: 26px;
+`;
+
+const CheckboxWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const StyledCheckbox = styled.input`
+  width: 16px;
+  height: 16px;
+  border: 1px solid #b2c4d4;
+  border-radius: 3px;
+  background-color: transparent;
+  appearance: none;
+  cursor: pointer;
+  position: relative;
+
+  &:checked {
+    background-color: #08822a;
+    border: 1px solid #f4fff7;
+  }
 `;

@@ -14,15 +14,19 @@ import {
   SearchQuery,
   SelectedProduct,
 } from "./types";
-import { fetchInitialData, fetchProductsData } from "./action";
+import {
+  fetchInitialData,
+  fetchProductsData,
+  fetchProfileProductData,
+} from "./action";
 
 interface PricingState {
   initialData: InitialData | null;
   selectedPricingProfile: PROFILE_TYPE | null;
   pricingProfileOptions: PricingProfileOption;
-  selectedPricingAdjustmentMode: PRICE_ADJUSTMENT_MODE | null;
+  selectedPricingAdjustmentMode: PRICE_ADJUSTMENT_MODE;
   pricingAdjustmentOptions: PricingAdjustmentOptions;
-  selectedPricingIncrementMode: PRICE_INCREMENT_MODE | null;
+  selectedPricingIncrementMode: PRICE_INCREMENT_MODE;
   pricingIncrementOptions: PricingIncrementOptions;
   searchQuery: SearchQuery;
   searchProductData: Product[];
@@ -32,7 +36,7 @@ interface PricingState {
 
 const initialState: PricingState = {
   initialData: null,
-  selectedPricingProfile: PROFILE_TYPE.MULTIPLE_PRODUCT,
+  selectedPricingProfile: PROFILE_TYPE.ONE_PRODUCT,
   pricingProfileOptions: pricingProfileOptions,
   selectedPricingAdjustmentMode: PRICE_ADJUSTMENT_MODE.FIXED,
   pricingAdjustmentOptions: pricingAdjustmentOptions,
@@ -105,6 +109,12 @@ const pricingSlice = createSlice({
       })
       .addCase(fetchProductsData.rejected, (state, _) => {
         state.searchProductData = [];
+      })
+      .addCase(fetchProfileProductData.fulfilled, (state, action: any) => {
+        // state.searchProductData = action.payload;
+      })
+      .addCase(fetchProfileProductData.rejected, (state, _) => {
+        // state.searchProductData = [];
       });
   },
 });
@@ -116,6 +126,7 @@ export const {
   toggleProductSelection,
   selectAllProducts,
   deselectAllProducts,
-  setSearchQuery
+  setSearchQuery,
 } = pricingSlice.actions;
+
 export default pricingSlice.reducer;
