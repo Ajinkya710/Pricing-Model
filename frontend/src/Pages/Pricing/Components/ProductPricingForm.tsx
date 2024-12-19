@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import {
+  selectNewProfileData,
   selectPricingProfileOptions,
   selectSelectedPricingProfile,
 } from "../store/selector";
@@ -12,7 +13,7 @@ import {
   setProductSelectionRadio,
   setSelectedPricingProfile,
 } from "../store/slice";
-import React from "react";
+import React, { useState } from "react";
 import ProductSearch from "./ProductSearch";
 import PriceAdjustment from "./PriceAdjustment";
 import PriceTable from "./PriceTable";
@@ -22,6 +23,8 @@ const ProductPricingForm = () => {
   const dispatch = useAppDispatch();
   const selectedPricingProfile = useSelector(selectSelectedPricingProfile);
   const pricingProfileOptions = useSelector(selectPricingProfileOptions);
+  const newProfileData = useSelector(selectNewProfileData);
+  const [error, setError] = useState(false);
 
   return (
     <ProductPricingFormWrapper>
@@ -67,13 +70,26 @@ const ProductPricingForm = () => {
       <ProductSearch />
       <PriceAdjustment />
       <PriceTable />
+      {error && (
+        <Error>
+          Please make sure "New Price" for products is not negative.
+        </Error>
+      )}
       <ButtonsDiv>
         <p>Your entries are saved automatically</p>
         <Buttons>
           <BackButton>Back</BackButton>
           <NextButton
             onClick={() => {
-              dispatch(setIsComplete(true));
+              const isError = newProfileData.PriceDetails.some(
+                (profile) => profile.newAmount < 0
+              );
+
+              if (isError) {
+                setError(true);
+              } else {
+                dispatch(setIsComplete(true));
+              }
             }}
           >
             Next
@@ -182,4 +198,11 @@ const NextButton = styled.button`
   border: none;
   padding: 13px 16px;
   cursor: pointer;
+`;
+
+const Error = styled.div`
+  color: red;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
 `;
