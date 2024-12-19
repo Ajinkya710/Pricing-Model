@@ -2,18 +2,18 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { InitialData } from "./types";
 import axios from "axios";
 import { RootState } from "../../../store";
+import API_URL from "../../../http";
 
 export const fetchInitialData = createAsyncThunk<InitialData>(
   "fetchInitialData",
   async () => {
-    const response = await axios.get(
-      "http://localhost:5000/api/pricing/initial-data",
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    console.log(API_URL);
+
+    const response = await axios.get(`${API_URL}/api/pricing/initial-data`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
     return response.data;
   }
@@ -27,7 +27,7 @@ export const fetchProductsData = createAsyncThunk<
   const state = getState();
   const { searchString, category, segment, brand } = state.pricing.searchQuery;
 
-  const response = await axios.get("http://localhost:5000/api/products", {
+  const response = await axios.get(`${API_URL}/api/products`, {
     headers: {
       "Content-Type": "application/json",
     },
@@ -45,14 +45,11 @@ export const fetchProductsData = createAsyncThunk<
 export const fetchProfileProductData = createAsyncThunk<InitialData, string>(
   "fetchProfileProductData",
   async (id: string) => {
-    const response = await axios.get(
-      `http://localhost:5000/api/profile/${id}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await axios.get(`${API_URL}/api/profile/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
     return response.data;
   }
@@ -88,15 +85,11 @@ export const saveProfileData = createAsyncThunk<
     PriceDetails: newPricingData,
   };
 
-  const response = await axios.post(
-    `http://localhost:5000/api/profile/${id}`,
-    newData,
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const response = await axios.post(`${API_URL}/api/profile/${id}`, newData, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
   return response.data;
 });
