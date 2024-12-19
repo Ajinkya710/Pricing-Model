@@ -6,6 +6,21 @@
 
     cd Pricing-Model
 
+**Create .env in the frontend directory
+
+    cd frontend
+    
+    .env
+
+    # Environment Mode: 'prod' for production, 'dev' for development
+    
+    REACT_APP_ENV=dev
+
+    # Backend URLs
+    
+    REACT_APP_PROD_API_URL=https://pricingmodel.herokuapp.com
+    
+    REACT_APP_DEV_API_URL=http://localhost:5000
 
 **Install dependencies:**
 
