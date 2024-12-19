@@ -57,3 +57,38 @@ export const fetchProfileProductData = createAsyncThunk<InitialData, string>(
     return response.data;
   }
 );
+
+export const saveProfileData = createAsyncThunk<
+  string,
+  string,
+  { state: RootState }
+>("saveProfileData", async (id, { getState }) => {
+  const state = getState();
+  const data = state.pricing.newProfileData;
+  const profileData = data.ProfileData;
+  const adjustmentMode = state.pricing.selectedPricingAdjustmentMode;
+  const increamentMode = state.pricing.selectedPricingIncrementMode;
+
+  const newProfileData = {
+    ...profileData,
+    adjustmentMode,
+    increamentMode,
+  };
+
+  const newData = {
+    ...data,
+    ProfileData: newProfileData,
+  };
+
+  const response = await axios.post(
+    `http://localhost:5000/api/profile/${id}`,
+    newData,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  return response.data;
+});

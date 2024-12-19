@@ -4,6 +4,7 @@ import ProductPricingForm from "./ProductPricingForm";
 import { useSelector } from "react-redux";
 import {
   selectIsComplete,
+  selectNewProfileData,
   selectSelectedPricingAdjustmentMode,
   selectSelectedPricingIncrementMode,
   selectSelectedProducts,
@@ -13,6 +14,7 @@ import { setIsComplete } from "../store/slice";
 import { useAppDispatch } from "../../../store";
 import { PRICE_ADJUSTMENT_MODE, PRICE_INCREMENT_MODE } from "../store/types";
 import { ReactComponent as SampleProductImage } from "../../../Assets/svg/SampleProductImage.svg";
+import { saveProfileData } from "../store/action";
 
 const ProductPricing = () => {
   const dispatch = useAppDispatch();
@@ -24,6 +26,7 @@ const ProductPricing = () => {
   const selectedPricingIncrementMode = useSelector(
     selectSelectedPricingIncrementMode
   );
+  const newProfileData = useSelector(selectNewProfileData);
 
   return (
     <ProductPricingWrapper>
@@ -86,8 +89,7 @@ const ProductPricing = () => {
               </BackButton>
               <NextButton
                 onClick={() => {
-                  // dispatch(setIsComplete(true));
-                  // console.log(newProfileData);
+                  dispatch(saveProfileData(newProfileData.ProfileData.id));
                 }}
               >
                 Save & Publish Profile

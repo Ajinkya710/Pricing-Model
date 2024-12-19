@@ -10,6 +10,7 @@ import {
   selectSelectedPricingIncrementMode,
 } from "../store/selector";
 import {
+  setBasedOnNewProductData,
   setSelectedPricingAdjustmentMode,
   setSelectedPricingIncrementMode,
 } from "../store/slice";
@@ -42,6 +43,7 @@ const PriceAdjustment = () => {
               basedOnOptions.find((o) => o.id === e.target.value)?.name ?? "";
             setSelectedBasedOn(label);
             await dispatch(fetchProfileProductData(e.target.value));
+            dispatch(setBasedOnNewProductData(e.target.value));
           } else {
             setSelectedBasedOn("");
           }

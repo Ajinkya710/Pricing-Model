@@ -20,6 +20,7 @@ import {
   fetchInitialData,
   fetchProductsData,
   fetchProfileProductData,
+  saveProfileData,
 } from "./action";
 import { calculateNewPrice } from "../../../helper";
 
@@ -115,7 +116,13 @@ const pricingSlice = createSlice({
       state.selectedProducts = [];
     },
     setIsComplete: (state, action: PayloadAction<boolean>) => {
-      state.isComplete = action.payload
+      state.isComplete = action.payload;
+    },
+    setBasedOnNewProductData: (state, action: PayloadAction<string>) => {
+      const profileData = state.newProfileData.ProfileData;
+      if (profileData) {
+        profileData.basedOn = action.payload;
+      }
     },
     setAdjustmentNewProductData: (
       state,
@@ -134,7 +141,7 @@ const pricingSlice = createSlice({
           adjustment: value,
           adjustmentMode: adjustmentMode,
           incrementMode: incrementMode,
-        })
+        });
       }
     },
   },
@@ -158,6 +165,12 @@ const pricingSlice = createSlice({
       })
       .addCase(fetchProfileProductData.rejected, (state, _) => {
         state.newProfileData.PriceDetails = [];
+      })
+      .addCase(saveProfileData.fulfilled, (state, _) => {
+        // state.newProfileData.PriceDetails = action.payload.pricingDetails;
+      })
+      .addCase(saveProfileData.rejected, (state, _) => {
+        // state.newProfileData.PriceDetails = [];
       });
   },
 });
@@ -172,5 +185,6 @@ export const {
   setSearchQuery,
   setIsComplete,
   setAdjustmentNewProductData,
+  setBasedOnNewProductData,
 } = pricingSlice.actions;
 export default pricingSlice.reducer;

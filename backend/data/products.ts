@@ -8,10 +8,26 @@ export const categories = [
 ];
 
 export const subCategories = [
-  { id: "f1e2d3c4-b5a6-7d8e-9f0g-1h2i3j4k5l6m", name: "Wine", categoryId: "a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6" },
-  { id: "m1l2k3j4-h5g6-7i8f-9e0d-1c2b3a4d5f6g", name: "Beer", categoryId: "a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6" },
-  { id: "g1f2e3d4-h5d6-7c8b-9a0j-1i2k3l4m5n6o", name: "Fruits", categoryId: "p6o5n4m3-l2k1j0i9-h8g7f6e5-d4c3b2a1" },
-  { id: "a1b2c3d4-d5e6-7f8g-9h0i-1j2k3l4m5n6p", name: "Biscuits", categoryId: "p6o5n4m3-l2k1j0i9-h8g7f6e5-d4c3b2a1" },
+  {
+    id: "f1e2d3c4-b5a6-7d8e-9f0g-1h2i3j4k5l6m",
+    name: "Wine",
+    categoryId: "a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6",
+  },
+  {
+    id: "m1l2k3j4-h5g6-7i8f-9e0d-1c2b3a4d5f6g",
+    name: "Beer",
+    categoryId: "a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6",
+  },
+  {
+    id: "g1f2e3d4-h5d6-7c8b-9a0j-1i2k3l4m5n6o",
+    name: "Fruits",
+    categoryId: "p6o5n4m3-l2k1j0i9-h8g7f6e5-d4c3b2a1",
+  },
+  {
+    id: "a1b2c3d4-d5e6-7f8g-9h0i-1j2k3l4m5n6p",
+    name: "Biscuits",
+    categoryId: "p6o5n4m3-l2k1j0i9-h8g7f6e5-d4c3b2a1",
+  },
 ];
 
 export const segments = [
@@ -40,20 +56,20 @@ export const products: Product[] = [
     id: "p1o2i3u4-y5t6r7e8-w9q0p1a2-s3d4f5g6h7j8",
     title: "High Garden Pinot Noir 2021",
     skuCode: "HGVPIN216",
-    brandId: "b1r2a3n4-d5e6-7f8g-9h0i-1j2k3l4m5n6o",  // High Garden
-    categoryId: "a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6",  // Alcoholic Beverages
-    subCategoryId: "f1e2d3c4-b5a6-7d8e-9f0g-1h2i3j4k5l6m",  // Wine
-    segmentId: "s1e2g3m4-e5n6-7t8s-9a0g-b1f2g3h4i5j6",  // Red
+    brandId: "b1r2a3n4-d5e6-7f8g-9h0i-1j2k3l4m5n6o", // High Garden
+    categoryId: "a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6", // Alcoholic Beverages
+    subCategoryId: "f1e2d3c4-b5a6-7d8e-9f0g-1h2i3j4k5l6m", // Wine
+    segmentId: "s1e2g3m4-e5n6-7t8s-9a0g-b1f2g3h4i5j6", // Red
     isValid: true,
   },
   {
     id: "p2o3i4u5-y6t7r8e9-w0q1p2a3-s4d5f6g7h8j9",
     title: "Koyama Methode Brut Nature NV",
     skuCode: "KOYBRUNV6",
-    brandId: "b2r3a4n5-d6e7-8f9g-0h1i-2j3k4l5m6n7p",  // Koyama Wines
-    categoryId: "a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6",  // Alcoholic Beverages
-    subCategoryId: "f1e2d3c4-b5a6-7d8e-9f0g-1h2i3j4k5l6m",  // Wine
-    segmentId: "s2e3g4m5-e6n7-8t9s-0a1g-b2f3g4h5i6j7",  // Sparkling
+    brandId: "b2r3a4n5-d6e7-8f9g-0h1i-2j3k4l5m6n7p", // Koyama Wines
+    categoryId: "a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6", // Alcoholic Beverages
+    subCategoryId: "f1e2d3c4-b5a6-7d8e-9f0g-1h2i3j4k5l6m", // Wine
+    segmentId: "s2e3g4m5-e6n7-8t9s-0a1g-b2f3g4h5i6j7", // Sparkling
     isValid: true,
   },
   // Alcoholic Beverages -> Beer
@@ -61,20 +77,20 @@ export const products: Product[] = [
     id: "p3o4i5u6-y7t8r9e0-w1q2p3a4-s5d6f7g8h9j0",
     title: "Corona Extra",
     skuCode: "CRNEXTRA",
-    brandId: "b3r4a5n6-d7e8-9f0g-1h2i-3j4k5l6m7n8q",  // Corona
-    categoryId: "a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6",  // Alcoholic Beverages
-    subCategoryId: "m1l2k3j4-h5g6-7i8f-9e0d-1c2b3a4d5f6g",  // Beer
-    segmentId: "s3e4g5m6-e7n8-9t0s-1a2g-b3f4g5h6i7j8",  // Pale Lager
+    brandId: "b3r4a5n6-d7e8-9f0g-1h2i-3j4k5l6m7n8q", // Corona
+    categoryId: "a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6", // Alcoholic Beverages
+    subCategoryId: "m1l2k3j4-h5g6-7i8f-9e0d-1c2b3a4d5f6g", // Beer
+    segmentId: "s3e4g5m6-e7n8-9t0s-1a2g-b3f4g5h6i7j8", // Pale Lager
     isValid: true,
   },
   {
     id: "p4o5i6u7-y8t9r0e1-w2q3p4a5-s6d7f8g9h9k0",
     title: "Guinness Draught",
     skuCode: "GNNDRAUGHT",
-    brandId: "b4r5a6n7-d8e9-0f1g-2h3i-4j5k6l7m8n9r",  // Guinness
-    categoryId: "a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6",  // Alcoholic Beverages
-    subCategoryId: "m1l2k3j4-h5g6-7i8f-9e0d-1c2b3a4d5f6g",  // Beer
-    segmentId: "s4e5g6m7-e8n9-0t1s-2a3g-b4f5g6h7i8j9",  // Stout
+    brandId: "b4r5a6n7-d8e9-0f1g-2h3i-4j5k6l7m8n9r", // Guinness
+    categoryId: "a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6", // Alcoholic Beverages
+    subCategoryId: "m1l2k3j4-h5g6-7i8f-9e0d-1c2b3a4d5f6g", // Beer
+    segmentId: "s4e5g6m7-e8n9-0t1s-2a3g-b4f5g6h7i8j9", // Stout
     isValid: true,
   },
   // Food -> Fruits
@@ -82,30 +98,30 @@ export const products: Product[] = [
     id: "p5o6i7u8-y9t0r1e2-w3q4p5a6-s7d8f9g0h9j0",
     title: "Red Apple",
     skuCode: "APLRED001",
-    brandId: "b5r6a7n8-d9e0-1f2g-3h4i-5j6k7l8m9s0t",  // Fresh Farm
-    categoryId: "p6o5n4m3-l2k1j0i9-h8g7f6e5-d4c3b2a1",  // Food
-    subCategoryId: "g1f2e3d4-h5d6-7c8b-9a0j-1i2k3l4m5n6o",  // Fruits
-    segmentId: "s5e6g7m8-e9n0-1t2s-3a4g-b5f6g7h8i9j0",  // Fruit
+    brandId: "b5r6a7n8-d9e0-1f2g-3h4i-5j6k7l8m9s0t", // Fresh Farm
+    categoryId: "p6o5n4m3-l2k1j0i9-h8g7f6e5-d4c3b2a1", // Food
+    subCategoryId: "g1f2e3d4-h5d6-7c8b-9a0j-1i2k3l4m5n6o", // Fruits
+    segmentId: "s5e6g7m8-e9n0-1t2s-3a4g-b5f6g7h8i9j0", // Fruit
     isValid: true,
   },
   {
     id: "p6o7i8u9-y0t1r2e3-w4q5p6a7-s8d9f0g1h2j0",
     title: "Green Apple",
     skuCode: "APLGRN001",
-    brandId: "b5r6a7n8-d9e0-1f2g-3h4i-5j6k7l8m9s0t",  // Fresh Farm
-    categoryId: "p6o5n4m3-l2k1j0i9-h8g7f6e5-d4c3b2a1",  // Food
-    subCategoryId: "g1f2e3d4-h5d6-7c8b-9a0j-1i2k3l4m5n6o",  // Fruits
-    segmentId: "s5e6g7m8-e9n0-1t2s-3a4g-b5f6g7h8i9j0",  // Fruit
+    brandId: "b5r6a7n8-d9e0-1f2g-3h4i-5j6k7l8m9s0t", // Fresh Farm
+    categoryId: "p6o5n4m3-l2k1j0i9-h8g7f6e5-d4c3b2a1", // Food
+    subCategoryId: "g1f2e3d4-h5d6-7c8b-9a0j-1i2k3l4m5n6o", // Fruits
+    segmentId: "s5e6g7m8-e9n0-1t2s-3a4g-b5f6g7h8i9j0", // Fruit
     isValid: true,
   },
   {
     id: "p7o8i9u0-y1t2r3e4-w5q6p7a8-s9d0f1g2h3j0",
     title: "Banana",
     skuCode: "APLBNN001",
-    brandId: "b5r6a7n8-d9e0-1f2g-3h4i-5j6k7l8m9s0t",  // Fresh Farm
-    categoryId: "p6o5n4m3-l2k1j0i9-h8g7f6e5-d4c3b2a1",  // Food
-    subCategoryId: "g1f2e3d4-h5d6-7c8b-9a0j-1i2k3l4m5n6o",  // Fruits
-    segmentId: "s5e6g7m8-e9n0-1t2s-3a4g-b5f6g7h8i9j0",  // Fruit
+    brandId: "b5r6a7n8-d9e0-1f2g-3h4i-5j6k7l8m9s0t", // Fresh Farm
+    categoryId: "p6o5n4m3-l2k1j0i9-h8g7f6e5-d4c3b2a1", // Food
+    subCategoryId: "g1f2e3d4-h5d6-7c8b-9a0j-1i2k3l4m5n6o", // Fruits
+    segmentId: "s5e6g7m8-e9n0-1t2s-3a4g-b5f6g7h8i9j0", // Fruit
     isValid: true,
   },
   // Food -> Biscuits
@@ -113,21 +129,30 @@ export const products: Product[] = [
     id: "p8o9i0u1-y2t3r4e5-w6q7p8a9-s0d1f2g3h4j0",
     title: "McVitie's Digestive Biscuits",
     skuCode: "MVDGBISCUIT1",
-    brandId: "b8r9a0n1-d2e3-4f5g-6h7i-8j9k0l1m2v3x",  // McVitie's
-    categoryId: "p6o5n4m3-l2k1j0i9-h8g7f6e5-d4c3b2a1",  // Food
-    subCategoryId: "a1b2c3d4-d5e6-7f8g-9h0i-1j2k3l4m5n6p",  // Biscuits
-    segmentId: "s6e7g8m9-e0n1-2t3s-4a5g-b6f7g8h9i0j1",  // Snack
+    brandId: "b8r9a0n1-d2e3-4f5g-6h7i-8j9k0l1m2v3x", // McVitie's
+    categoryId: "p6o5n4m3-l2k1j0i9-h8g7f6e5-d4c3b2a1", // Food
+    subCategoryId: "a1b2c3d4-d5e6-7f8g-9h0i-1j2k3l4m5n6p", // Biscuits
+    segmentId: "s6e7g8m9-e0n1-2t3s-4a5g-b6f7g8h9i0j1", 
     isValid: true,
   },
 ];
 
-
-export const profiles: Profiles[] = [
+export let profiles: Profiles[] = [
   {
-    id: "123e4567-e89b-12d3-a456-426614174000", // Random UUID string
+    id: "123e4567-e89b-12d3-a456-426614174000", 
     name: "Global Wholesale Price",
-    expDate: new Date("2024-12-31T23:59:59Z"), // Example expiration date
+    expDate: new Date("2024-12-31T23:59:59Z"), 
     status: 1,
+    basedOn: null,
+    adjustmentMode: null,
+    increamentMode: null,
+    isValid: true,
+  },
+  {
+    id: "a1b2c3d4-d5e6-7f8g-9h0i-1j2k3l4m5n6p",
+    name: "Heaps Normal #4",
+    expDate: new Date("2024-12-31T23:59:59Z"),
+    status: 0,
     basedOn: null,
     adjustmentMode: null,
     increamentMode: null,
@@ -135,7 +160,7 @@ export const profiles: Profiles[] = [
   },
 ];
 
-export const pricingDetail: PricingDetail[] = [
+export let pricingDetail: PricingDetail[] = [
   {
     id: "abc12345-def6-7890-gh12-ijklmnopqrst", // Random UUID string
     productId: "p1o2i3u4-y5t6r7e8-w9q0p1a2-s3d4f5g6h7j8", // High Garden Pinot Noir 2021
