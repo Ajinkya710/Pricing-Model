@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/Pricing-Model/static/css/main.aef4cf7e.css",
+    "main.js": "/Pricing-Model/static/js/main.e440c1d7.js",
+    "static/media/SampleProductImage.svg": "/Pricing-Model/static/media/SampleProductImage.bb9d56d9bcf256c3233a9845ff48d82e.svg",
+    "static/media/Settings.svg": "/Pricing-Model/static/media/Settings.25d864c3410b681126951e64306b76bb.svg",
+    "static/media/Integrations.svg": "/Pricing-Model/static/media/Integrations.f338067782daf3f3f31bef1aaa877303.svg",
+    "static/media/Freight.svg": "/Pricing-Model/static/media/Freight.2e72410028fece6ec745baba287094de.svg",
+    "static/media/Question.svg": "/Pricing-Model/static/media/Question.161e88eae5b8971f8f6a61a27b21cc49.svg",
+    "static/media/LightbulbFilament.svg": "/Pricing-Model/static/media/LightbulbFilament.b1a0d4e7cdeeda8847fa83297b621b90.svg",
+    "static/media/Dashboard.svg": "/Pricing-Model/static/media/Dashboard.73e48fcfb7289a176e13af93f62a3088.svg",
+    "static/media/Customers.svg": "/Pricing-Model/static/media/Customers.2db6112630bf57d6d4ab017d0b0fb1db.svg",
+    "static/media/RefreshIcon.svg": "/Pricing-Model/static/media/RefreshIcon.48d0344ad25954dfd48949e4b79ae192.svg",
+    "static/media/Bell.svg": "/Pricing-Model/static/media/Bell.33cf41ce03edd4c53911492a03ba4e11.svg",
+    "static/media/Search.svg": "/Pricing-Model/static/media/Search.12561c70e28c72182502a3fe8e774243.svg",
+    "static/media/Orders.svg": "/Pricing-Model/static/media/Orders.8ea804de9fecd69c41376b216f617ffc.svg",
+    "static/media/EditIcon.svg": "/Pricing-Model/static/media/EditIcon.6add912f05e0a1c1ea21e7e9529f2679.svg",
+    "static/media/BreadcrumbArrow.svg": "/Pricing-Model/static/media/BreadcrumbArrow.4c12a376b6c2fd41ecd510104a151998.svg",
+    "static/media/Products.svg": "/Pricing-Model/static/media/Products.95263f0c80d76f00c77c393f4ca34d68.svg",
+    "index.html": "/Pricing-Model/index.html",
+    "static/media/Pricing.svg": "/Pricing-Model/static/media/Pricing.80a20c39cca4f6990e23ba2b8b735d09.svg",
+    "main.aef4cf7e.css.map": "/Pricing-Model/static/css/main.aef4cf7e.css.map",
+    "main.e440c1d7.js.map": "/Pricing-Model/static/js/main.e440c1d7.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.aef4cf7e.css",
+    "static/js/main.e440c1d7.js"
+  ]
+}
