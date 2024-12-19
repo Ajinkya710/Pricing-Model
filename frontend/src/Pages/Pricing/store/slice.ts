@@ -116,5 +116,6 @@ export const {
   toggleProductSelection,
   selectAllProducts,
   deselectAllProducts,
+  setSearchQuery
 } = pricingSlice.actions;
 export default pricingSlice.reducer;

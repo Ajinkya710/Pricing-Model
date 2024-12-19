@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { fetchProductsData } from "../store/action";
 import { useAppDispatch } from "../../../store";
 import ProductsDisplay from "./ProductsDisplay";
+import { setSearchQuery } from "../store/slice";
 
 const ProductSearch = () => {
   const dispatch = useAppDispatch();
@@ -14,11 +15,6 @@ const ProductSearch = () => {
   const categories = initialData?.InitialData.Categories || [];
   const segments = initialData?.InitialData.Segments || [];
   const brands = initialData?.InitialData.Brands || [];
-
-  const [search1, setSearch1] = useState("");
-  const [dropdown1, setDropdown1] = useState("");
-  const [dropdown2, setDropdown2] = useState("");
-  const [dropdown3, setDropdown3] = useState("");
 
   useEffect(() => {
     const getData = async () => {
@@ -36,34 +32,48 @@ const ProductSearch = () => {
           <SearchBar
             id="searchBar"
             type="text"
-            value={search1}
             placeholder="Search Product / SKU"
-            onChange={(e) => setSearch1(e.target.value)}
+            onChange={async (e) => {
+              dispatch(
+                setSearchQuery({ type: "searchString", value: e.target.value })
+              );
+              await dispatch(fetchProductsData());
+            }}
           />
         </SearchBarContainer>
         <div>
           <Dropdown
             id="category"
-            value={dropdown1}
-            onChange={(e) => setDropdown1(e.target.value)}
+            onChange={async (e) => {
+              dispatch(
+                setSearchQuery({ type: "category", value: e.target.value })
+              );
+              await dispatch(fetchProductsData());
+            }}
           >
-            <option value="">Category</option>
+            <option value="">Select Category</option>
+
             {categories.map((category) => (
-              <optgroup key={category.id} label={category.name}>
+              <React.Fragment key={category.id}>
+                <option value={category.id}>{category.name}</option>
                 {category.subCategories.map((subCategory) => (
                   <option key={subCategory.id} value={subCategory.id}>
-                    {subCategory.name}
+                    {`-- ${subCategory.name}`}
                   </option>
                 ))}
-              </optgroup>
+              </React.Fragment>
             ))}
           </Dropdown>
         </div>
         <div>
           <Dropdown
             id="segment"
-            value={dropdown2}
-            onChange={(e) => setDropdown2(e.target.value)}
+            onChange={async (e) => {
+              dispatch(
+                setSearchQuery({ type: "segment", value: e.target.value })
+              );
+              await dispatch(fetchProductsData());
+            }}
           >
             <option value="">Segment</option>
             {segments.map((segment) => (
@@ -76,8 +86,12 @@ const ProductSearch = () => {
         <div>
           <Dropdown
             id="brand"
-            value={dropdown3}
-            onChange={(e) => setDropdown3(e.target.value)}
+            onChange={async (e) => {
+              dispatch(
+                setSearchQuery({ type: "brand", value: e.target.value })
+              );
+              await dispatch(fetchProductsData());
+            }}
           >
             <option value="">Brand</option>
             {brands.map((brand) => (
