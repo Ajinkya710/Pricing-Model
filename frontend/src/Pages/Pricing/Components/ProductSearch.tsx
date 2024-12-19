@@ -4,7 +4,6 @@ import { ReactComponent as Search } from "../../../Assets/svg/Search.svg";
 
 const ProductSearch = () => {
   const [search1, setSearch1] = useState("");
-  const [search2, setSearch2] = useState("");
   const [dropdown1, setDropdown1] = useState("");
   const [dropdown2, setDropdown2] = useState("");
   const [dropdown3, setDropdown3] = useState("");
@@ -19,21 +18,10 @@ const ProductSearch = () => {
             id="searchBar"
             type="text"
             value={search1}
-            placeholder="Search..."
+            placeholder="Search Product / SKU"
             onChange={(e) => setSearch1(e.target.value)}
           />
         </SearchBarContainer>
-
-        {/* Second Search Bar */}
-        <div>
-          <SearchBar
-            id="search2"
-            type="text"
-            value={search2}
-            placeholder="Product / SKU"
-            onChange={(e) => setSearch2(e.target.value)}
-          />
-        </div>
 
         {/* Dropdown 1 */}
         <div>
@@ -87,14 +75,14 @@ export default ProductSearch;
 
 const ProductSearchWrapper = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
 
   @media (max-width: 1200px) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 996px) {
     grid-template-columns: 1fr;
   }
 `;

@@ -1,34 +1,30 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
+  InitialData,
   PRICE_ADJUSTMENT_MODE,
   PRICE_INCREMENT_MODE,
+  PricingAdjustmentOptions,
   pricingAdjustmentOptions,
+  PricingIncrementOptions,
   pricingIncrementOptions,
+  PricingProfileOption,
   pricingProfileOptions,
   PROFILE_TYPE,
 } from "./types";
+import { fetchInitialData } from "./action";
 
 interface PricingState {
-  data: any[];
+  initialData: InitialData | null;
   selectedPricingProfile: PROFILE_TYPE | null;
-  pricingProfileOptions: {
-    name: string;
-    value: PROFILE_TYPE;
-  }[];
+  pricingProfileOptions: PricingProfileOption;
   selectedPricingAdjustmentMode: PRICE_ADJUSTMENT_MODE | null;
-  pricingAdjustmentOptions: {
-    name: string;
-    value: PRICE_ADJUSTMENT_MODE;
-  }[];
+  pricingAdjustmentOptions: PricingAdjustmentOptions;
   selectedPricingIncrementMode: PRICE_INCREMENT_MODE | null;
-  pricingIncrementOptions: {
-    name: string;
-    value: PRICE_INCREMENT_MODE;
-  }[];
+  pricingIncrementOptions: PricingIncrementOptions;
 }
 
 const initialState: PricingState = {
-  data: [],
+  initialData: null,
   selectedPricingProfile: null,
   pricingProfileOptions: pricingProfileOptions,
   selectedPricingAdjustmentMode: null,
@@ -57,7 +53,18 @@ const pricingSlice = createSlice({
       state.selectedPricingIncrementMode = action.payload;
     },
   },
-  extraReducers: () => {},
+  extraReducers: (builder) => {
+    builder
+    .addCase(
+      fetchInitialData.fulfilled,
+      (state, action: any) => {
+        state.initialData = action.payload;
+      }
+    )
+    .addCase(fetchInitialData.rejected, (state, action) => {
+      // state.error = action.error.message || "Failed to fetch colors";
+    });
+  },
 });
 
 export const {

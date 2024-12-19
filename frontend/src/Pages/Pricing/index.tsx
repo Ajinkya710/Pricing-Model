@@ -1,11 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Breadcrumbs from "../../Layout/Breadcrumbs";
 import styled from "styled-components";
 import PricingProfile from "./Components/PricingProfile";
 import ProductPricing from "./Components/ProductPricing";
 import AssignCustomer from "./Components/AssignCustomer";
+import { useAppDispatch } from "../../store";
+import { fetchInitialData } from "./store/action";
+import { useSelector } from "react-redux";
+import { selectInitialData } from "./store/selector";
 
 const Pricing = () => {
+  const dispatch = useAppDispatch();
+  const initialData = useSelector(selectInitialData);
+  console.log(initialData);
+
+  useEffect(() => {
+    const getInitialData = async () => {
+      dispatch(fetchInitialData());
+    };
+    getInitialData();
+  }, [dispatch]);
+
   return (
     <MainWrapper>
       <PricingWrapper>

@@ -16,6 +16,9 @@ const selectSelectedPricingIncrementMode = (state: RootState) =>
 const selectPricingIncrementOptions = (state: RootState) =>
   state.pricing.pricingIncrementOptions;
 
+const selectInitialData = (state: RootState) =>
+  state.pricing.initialData;
+
 export {
   selectSelectedPricingProfile,
   selectPricingProfileOptions,
@@ -23,4 +26,5 @@ export {
   selectPricingAdjustmentOptions,
   selectSelectedPricingIncrementMode,
   selectPricingIncrementOptions,
+  selectInitialData,
 };
