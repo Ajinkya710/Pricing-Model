@@ -11,7 +11,6 @@ import { setSearchQuery } from "../store/slice";
 const ProductSearch = () => {
   const dispatch = useAppDispatch();
   const initialData = useSelector(selectInitialData);
-
   const categories = initialData?.InitialData.Categories || [];
   const segments = initialData?.InitialData.Segments || [];
   const brands = initialData?.InitialData.Brands || [];

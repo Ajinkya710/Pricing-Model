@@ -2,8 +2,14 @@ import moment from "moment";
 import React from "react";
 import styled from "styled-components";
 import { ReactComponent as EditIcon } from "../../../Assets/svg/EditIcon.svg";
+import { useSelector } from "react-redux";
+import { selectInitialData } from "../store/selector";
+import { getDaysUntilExpiry } from "../../../helper";
 
 const PricingProfile = () => {
+  const initialData = useSelector(selectInitialData);
+  const profileData = initialData?.ProfileData;
+
   return (
     <PricingProfileWrapper>
       <DescriptionBox>
@@ -20,10 +26,11 @@ const PricingProfile = () => {
       <DescriptionBox>
         <div>
           <p>You’ve created a Price Profile</p>
-          <p>Heaps Normal #4</p>
+          <p>{profileData?.name ?? ""}</p>
           <p>
-            Marked as <span>Default</span>, and expires in <span>16 Days</span>(
-            {moment().add(16, "days").format("DD/MM/YYYY")})
+            Marked as <span>Default</span>, and expires in{" "}
+            <span>{`${getDaysUntilExpiry(profileData?.expDate) ?? ""} Days`}</span>(
+            {moment(profileData?.expDate).format("DD/MM/YYYY")})
           </p>
         </div>
         <EditButton>

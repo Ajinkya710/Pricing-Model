@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {
+  selectInitialData,
   selectSearchProductData,
   selectSelectedPricingProfile,
   selectSelectedProducts,
@@ -21,6 +22,8 @@ const ProductsDisplay = () => {
   const [productSelection, setProductSelection] = useState<string>("none");
   const selectedProducts = useSelector(selectSelectedProducts);
   const selectedPricingProfile = useSelector(selectSelectedPricingProfile);
+  const initialData = useSelector(selectInitialData);
+  const profileData = initialData?.ProfileData;
 
   useEffect(() => {
     if (selectedPricingProfile === PROFILE_TYPE.ONE_PRODUCT) {
@@ -133,7 +136,7 @@ const ProductsDisplay = () => {
       </ProductsDisplayWrapper>
       <p>
         You’ve selected <b>{selectedProducts.length} Products</b>, these will be
-        added to <b>Profile Name</b>
+        added to <b>{`${profileData?.name ?? ""}`}</b>
       </p>
     </React.Fragment>
   );

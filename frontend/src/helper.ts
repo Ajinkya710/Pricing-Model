@@ -1,3 +1,4 @@
+import moment from "moment";
 import {
   PRICE_ADJUSTMENT_MODE,
   PRICE_INCREMENT_MODE,
@@ -9,6 +10,21 @@ interface PriceCalculationParams {
   adjustmentMode: PRICE_ADJUSTMENT_MODE;
   incrementMode: PRICE_INCREMENT_MODE;
 }
+
+const getDaysUntilExpiry = (
+  expDate: string | Date | undefined
+): number | null => {
+  if (!expDate || !moment(expDate).isValid()) {
+    return null;
+  }
+
+  // Calculate the difference in days between current date and expDate
+  const expiryMoment = moment(expDate);
+  const today = moment();
+  const daysRemaining = expiryMoment.diff(today, "days");
+
+  return daysRemaining;
+};
 
 const calculateNewPrice = ({
   basedOnPrice,
@@ -36,4 +52,4 @@ const calculateNewPrice = ({
   return parseFloat(newPrice.toFixed(2));
 };
 
-export { calculateNewPrice };
+export { getDaysUntilExpiry, calculateNewPrice };
