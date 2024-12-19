@@ -47,7 +47,6 @@ export class ProductController {
       categoryId,
       subCategoryId,
       segmentId,
-      globalWholesalePrice,
     } = req.body;
 
     if (
@@ -56,8 +55,7 @@ export class ProductController {
       !brandId ||
       !categoryId ||
       !categoryId ||
-      !segmentId ||
-      !globalWholesalePrice
+      !segmentId
     ) {
       res.status(400).json({ error: "All fields are required" });
     } else {

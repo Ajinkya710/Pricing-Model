@@ -7,10 +7,9 @@ export class ProductService {
   private productList: Product[];
 
   constructor() {
-    this.productList = products; // Initialize with the imported data
+    this.productList = products;
   }
 
-  // Get Filtered products based on search and filters
   getFilteredProducts(
     search?: string,
     categoryId?: string,
@@ -30,7 +29,6 @@ export class ProductService {
         .map((result) => result.item);
     }
 
-    // Filter by Category (now using categoryId UUID)
     if (categoryId) {
       const categoryIdsArray = categoryId.toString().split(",");
       filteredProducts = filteredProducts.filter((product) =>
@@ -38,14 +36,12 @@ export class ProductService {
       );
     }
 
-    // Filter by Segment (now using segmentId UUID)
     if (segmentId) {
       filteredProducts = filteredProducts.filter(
         (product) => product.segmentId === segmentId.toString()
       );
     }
 
-    // Filter by Brand (now using brandId UUID)
     if (brandId) {
       filteredProducts = filteredProducts.filter(
         (product) => product.brandId === brandId.toString()
