@@ -5,14 +5,15 @@ import PricingProfile from "./Components/PricingProfile";
 import ProductPricing from "./Components/ProductPricing";
 import AssignCustomer from "./Components/AssignCustomer";
 import { useAppDispatch } from "../../store";
-import { fetchInitialData } from "./store/action";
+import { fetchInitialData, fetchProductsData } from "./store/action";
 
 const Pricing = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     const getInitialData = async () => {
-      dispatch(fetchInitialData());
+      await dispatch(fetchInitialData());
+      await dispatch(fetchProductsData());
     };
     getInitialData();
   }, [dispatch]);

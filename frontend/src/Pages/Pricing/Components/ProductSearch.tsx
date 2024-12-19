@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { ReactComponent as Search } from "../../../Assets/svg/Search.svg";
 import { selectInitialData } from "../store/selector";
@@ -14,13 +14,6 @@ const ProductSearch = () => {
   const categories = initialData?.InitialData.Categories || [];
   const segments = initialData?.InitialData.Segments || [];
   const brands = initialData?.InitialData.Brands || [];
-
-  useEffect(() => {
-    const getData = async () => {
-      dispatch(fetchProductsData());
-    };
-    getData();
-  }, [dispatch]);
 
   return (
     <React.Fragment>

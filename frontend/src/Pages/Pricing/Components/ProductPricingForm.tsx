@@ -5,11 +5,18 @@ import {
   selectSelectedPricingProfile,
 } from "../store/selector";
 import { useAppDispatch } from "../../../store";
-import { setIsComplete, setSelectedPricingProfile } from "../store/slice";
+import {
+  deselectAllProducts,
+  selectAllProducts,
+  setIsComplete,
+  setProductSelectionRadio,
+  setSelectedPricingProfile,
+} from "../store/slice";
 import React from "react";
 import ProductSearch from "./ProductSearch";
 import PriceAdjustment from "./PriceAdjustment";
 import PriceTable from "./PriceTable";
+import { PROFILE_TYPE } from "../store/types";
 
 const ProductPricingForm = () => {
   const dispatch = useAppDispatch();
@@ -28,9 +35,24 @@ const ProductPricingForm = () => {
                 name="productSelection"
                 value={pricingProfile.value}
                 checked={pricingProfile.value === selectedPricingProfile}
-                onChange={() =>
-                  dispatch(setSelectedPricingProfile(pricingProfile.value))
-                }
+                onChange={(e) => {
+                  const selectedProfile = e.target.value;
+                  if (Number(selectedProfile) === PROFILE_TYPE.ONE_PRODUCT) {
+                    dispatch(deselectAllProducts());
+                    dispatch(setProductSelectionRadio(""));
+                  } else if (
+                    Number(selectedProfile) === PROFILE_TYPE.ALL_PRODUCT
+                  ) {
+                    dispatch(setProductSelectionRadio("all"));
+                    dispatch(selectAllProducts());
+                  } else if (
+                    Number(selectedProfile) === PROFILE_TYPE.MULTIPLE_PRODUCT
+                  ) {
+                    dispatch(setProductSelectionRadio("none"));
+                    dispatch(deselectAllProducts());
+                  }
+                  dispatch(setSelectedPricingProfile(pricingProfile.value));
+                }}
               />
               <CustomRadio
                 checked={selectedPricingProfile === pricingProfile.value}

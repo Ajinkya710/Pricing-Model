@@ -38,6 +38,8 @@ interface PricingState {
   adjustedProductData: SelectedProduct[];
   newProfileData: NewProfileData;
   isComplete: boolean;
+  selectedBasedOnPrice: string,
+  productSelectionRadio:string,
 }
 
 const initialState: PricingState = {
@@ -70,7 +72,9 @@ const initialState: PricingState = {
     },
     PriceDetails: [],
   },
+  selectedBasedOnPrice: "",
   isComplete: false,
+  productSelectionRadio: "none",
 };
 
 const pricingSlice = createSlice({
@@ -144,6 +148,18 @@ const pricingSlice = createSlice({
         });
       }
     },
+    setSelectedBasedOnPrice: (
+      state,
+      action: PayloadAction<string>
+    ) => {
+      state.selectedBasedOnPrice = action.payload;
+    },
+    setProductSelectionRadio: (
+      state,
+      action: PayloadAction<string>
+    ) => {
+      state.productSelectionRadio = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -186,6 +202,8 @@ export const {
   setIsComplete,
   setAdjustmentNewProductData,
   setBasedOnNewProductData,
+  setSelectedBasedOnPrice,
+  setProductSelectionRadio
 } = pricingSlice.actions;
 
 export default pricingSlice.reducer;

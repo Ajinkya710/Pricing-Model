@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useAppDispatch } from "../../../store";
 import { useSelector } from "react-redux";
 import {
+  selectBasedOnPrice,
   selectInitialData,
   selectPricingAdjustmentOptions,
   selectPricingIncrementOptions,
@@ -11,6 +12,7 @@ import {
 } from "../store/selector";
 import {
   setBasedOnNewProductData,
+  setSelectedBasedOnPrice,
   setSelectedPricingAdjustmentMode,
   setSelectedPricingIncrementMode,
 } from "../store/slice";
@@ -29,7 +31,8 @@ const PriceAdjustment = () => {
   const pricingIncrementOptions = useSelector(selectPricingIncrementOptions);
   const initialData = useSelector(selectInitialData);
   const basedOnOptions = initialData?.AllProfiles || [];
-  const [selectedBasedOn, setSelectedBasedOn] = useState("");
+  const [selectedBasedOnLabel, setSelectedBasedOnLabel] = useState("");
+  const basedOnPrice = useSelector(selectBasedOnPrice);
 
   return (
     <div>
@@ -37,15 +40,18 @@ const PriceAdjustment = () => {
       <p>Based On</p>
       <Dropdown
         id="based"
+        value={basedOnPrice}
         onChange={async (e) => {
           if (e.target.value) {
             const label =
               basedOnOptions.find((o) => o.id === e.target.value)?.name ?? "";
-            setSelectedBasedOn(label);
+            setSelectedBasedOnLabel(label);
+            dispatch(setSelectedBasedOnPrice(e.target.value));
             await dispatch(fetchProfileProductData(e.target.value));
             dispatch(setBasedOnNewProductData(e.target.value));
           } else {
-            setSelectedBasedOn("");
+            dispatch(setSelectedBasedOnPrice(""));
+            setSelectedBasedOnLabel("");
           }
         }}
       >
@@ -110,7 +116,7 @@ const PriceAdjustment = () => {
         <LightBulbIcon />
         <CustomText>
           The adjusted price will be calculated from
-          <span>{` ${selectedBasedOn} `}</span>
+          <span>{` ${selectedBasedOnLabel} `}</span>
           selected above
         </CustomText>
       </WarningDiv>

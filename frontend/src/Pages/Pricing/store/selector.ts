@@ -26,6 +26,10 @@ const selectNewProfileData = (state: RootState) => state.pricing.newProfileData;
 
 const selectIsComplete = (state: RootState) => state.pricing.isComplete;
 
+const selectBasedOnPrice = (state: RootState) => state.pricing.selectedBasedOnPrice;
+
+const selectProductSelectionRadio = (state: RootState) => state.pricing.productSelectionRadio;
+
 export {
   selectSelectedPricingProfile,
   selectPricingProfileOptions,
@@ -37,5 +41,7 @@ export {
   selectSearchProductData,
   selectSelectedProducts,
   selectNewProfileData,
-  selectIsComplete
+  selectIsComplete,
+  selectBasedOnPrice,
+  selectProductSelectionRadio
 };

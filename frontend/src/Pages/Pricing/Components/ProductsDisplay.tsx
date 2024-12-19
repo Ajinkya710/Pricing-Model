@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import {
   selectInitialData,
+  selectProductSelectionRadio,
   selectSearchProductData,
   selectSelectedPricingProfile,
   selectSelectedProducts,
@@ -12,6 +13,7 @@ import { useAppDispatch } from "../../../store";
 import {
   deselectAllProducts,
   selectAllProducts,
+  setProductSelectionRadio,
   toggleProductSelection,
 } from "../store/slice";
 import { PROFILE_TYPE } from "../store/types";
@@ -19,24 +21,11 @@ import { PROFILE_TYPE } from "../store/types";
 const ProductsDisplay = () => {
   const dispatch = useAppDispatch();
   const searchProductData = useSelector(selectSearchProductData);
-  const [productSelection, setProductSelection] = useState<string>("none");
+  const productSelection = useSelector(selectProductSelectionRadio);
   const selectedProducts = useSelector(selectSelectedProducts);
   const selectedPricingProfile = useSelector(selectSelectedPricingProfile);
   const initialData = useSelector(selectInitialData);
   const profileData = initialData?.ProfileData;
-
-  useEffect(() => {
-    if (selectedPricingProfile === PROFILE_TYPE.ONE_PRODUCT) {
-      setProductSelection("");
-      dispatch(deselectAllProducts());
-    } else if (selectedPricingProfile === PROFILE_TYPE.ALL_PRODUCT) {
-      setProductSelection("all");
-      dispatch(selectAllProducts());
-    } else if (selectedPricingProfile === PROFILE_TYPE.MULTIPLE_PRODUCT) {
-      setProductSelection("none");
-      dispatch(deselectAllProducts());
-    }
-  }, [dispatch, selectedPricingProfile]);
 
   const handleProductSelect = (productId: string) => {
     const product = searchProductData.find(
@@ -69,7 +58,7 @@ const ProductsDisplay = () => {
               selectedPricingProfile === PROFILE_TYPE.ALL_PRODUCT
             }
             onChange={() => {
-              setProductSelection("none");
+              dispatch(setProductSelectionRadio("none"));
               dispatch(deselectAllProducts());
             }}
           />
@@ -91,7 +80,7 @@ const ProductsDisplay = () => {
             checked={productSelection === "all"}
             disabled={selectedPricingProfile === PROFILE_TYPE.ONE_PRODUCT}
             onChange={() => {
-              setProductSelection("all");
+              dispatch(setProductSelectionRadio("all"));
               dispatch(selectAllProducts());
             }}
           />
