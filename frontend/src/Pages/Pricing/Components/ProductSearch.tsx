@@ -75,7 +75,7 @@ const ProductSearch = () => {
               await dispatch(fetchProductsData());
             }}
           >
-            <option value="">Segment</option>
+            <option value="">Select Segment</option>
             {segments.map((segment) => (
               <option key={segment.id} value={segment.id}>
                 {segment.name}
@@ -93,7 +93,7 @@ const ProductSearch = () => {
               await dispatch(fetchProductsData());
             }}
           >
-            <option value="">Brand</option>
+            <option value="">Select Brand</option>
             {brands.map((brand) => (
               <option key={brand.id} value={brand.id}>
                 {brand.name}

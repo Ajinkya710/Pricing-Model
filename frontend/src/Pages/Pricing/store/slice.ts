@@ -32,7 +32,7 @@ interface PricingState {
 
 const initialState: PricingState = {
   initialData: null,
-  selectedPricingProfile: null,
+  selectedPricingProfile: PROFILE_TYPE.MULTIPLE_PRODUCT,
   pricingProfileOptions: pricingProfileOptions,
   selectedPricingAdjustmentMode: PRICE_ADJUSTMENT_MODE.FIXED,
   pricingAdjustmentOptions: pricingAdjustmentOptions,

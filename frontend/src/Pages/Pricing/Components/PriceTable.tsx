@@ -71,6 +71,9 @@ const PriceTable: React.FC = () => {
           ))}
         </tbody>
       </table>
+      {selectedProducts.length === 0 && (
+        <NoProducts>No products selected</NoProducts>
+      )}
     </TableWrapper>
   );
 };
@@ -168,4 +171,13 @@ const RefreshButton = styled.button`
     font-weight: 600;
     font-size: 14px;
   }
+`;
+
+const NoProducts = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #212b36;
+  padding-top: 26px;
 `;

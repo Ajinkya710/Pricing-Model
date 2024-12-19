@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { selectSearchProductData, selectSelectedProducts } from "../store/selector";
+import {
+  selectSearchProductData,
+  selectSelectedPricingProfile,
+  selectSelectedProducts,
+} from "../store/selector";
 import styled from "styled-components";
 import { ReactComponent as SampleProductImage } from "../../../Assets/svg/SampleProductImage.svg";
 import { useAppDispatch } from "../../../store";
@@ -9,12 +13,26 @@ import {
   selectAllProducts,
   toggleProductSelection,
 } from "../store/slice";
+import { PROFILE_TYPE } from "../store/types";
 
 const ProductsDisplay = () => {
   const dispatch = useAppDispatch();
   const searchProductData = useSelector(selectSearchProductData);
   const [productSelection, setProductSelection] = useState<string>("none");
-  const selectedProducts = useSelector(selectSelectedProducts)
+  const selectedProducts = useSelector(selectSelectedProducts);
+  const selectedPricingProfile = useSelector(selectSelectedPricingProfile);
+
+  useEffect(() => {
+    if (selectedPricingProfile === PROFILE_TYPE.ONE_PRODUCT) {
+      setProductSelection("");
+      dispatch(deselectAllProducts());
+    } else if (selectedPricingProfile === PROFILE_TYPE.ALL_PRODUCT) {
+      setProductSelection("all");
+      dispatch(selectAllProducts());
+    } else if (selectedPricingProfile === PROFILE_TYPE.MULTIPLE_PRODUCT) {
+      setProductSelection("none");
+    }
+  }, [dispatch, selectedPricingProfile]);
 
   const handleProductSelect = (productId: string) => {
     const product = searchProductData.find(
@@ -37,6 +55,10 @@ const ProductsDisplay = () => {
             name="productSelection"
             value={"none"}
             checked={productSelection === "none"}
+            disabled={
+              selectedPricingProfile === PROFILE_TYPE.ONE_PRODUCT ||
+              selectedPricingProfile === PROFILE_TYPE.ALL_PRODUCT
+            }
             onChange={() => {
               setProductSelection("none");
               dispatch(deselectAllProducts());
@@ -52,6 +74,7 @@ const ProductsDisplay = () => {
             name="productSelection"
             value={"all"}
             checked={productSelection === "all"}
+            disabled={selectedPricingProfile === PROFILE_TYPE.ONE_PRODUCT}
             onChange={() => {
               setProductSelection("all");
               dispatch(selectAllProducts());
@@ -68,7 +91,14 @@ const ProductsDisplay = () => {
               <StyledCheckbox
                 type="checkbox"
                 checked={selectedProducts.some((p) => p.id === product.id)}
-                onChange={() => handleProductSelect(product.id)}
+                onChange={() => {
+                  if (selectedPricingProfile === PROFILE_TYPE.ONE_PRODUCT) {
+                    dispatch(deselectAllProducts());
+                    handleProductSelect(product.id);
+                  } else {
+                    handleProductSelect(product.id);
+                  }
+                }}
                 id={`checkbox-${product.id}`}
               />
             </CheckboxWrapper>
