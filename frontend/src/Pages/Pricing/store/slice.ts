@@ -23,6 +23,7 @@ import {
   saveProfileData,
 } from "./action";
 import { calculateNewPrice } from "../../../helper";
+import { message } from 'antd';
 
 interface PricingState {
   initialData: InitialData | null;
@@ -183,10 +184,10 @@ const pricingSlice = createSlice({
         state.newProfileData.PriceDetails = [];
       })
       .addCase(saveProfileData.fulfilled, (state, _) => {
-        // state.newProfileData.PriceDetails = action.payload.pricingDetails;
+        message.success('Profile saved successfully.')
       })
       .addCase(saveProfileData.rejected, (state, _) => {
-        // state.newProfileData.PriceDetails = [];
+        message.error('Failed to save Profile')
       });
   },
 });
