@@ -33,7 +33,7 @@
     npm start
 
 
-**Backend** :     This will start the Django server on http://localhost:8000.
+**Backend** :     This will start the Django server on http://localhost:5000.
     
 **API** - http://localhost:5000
 
